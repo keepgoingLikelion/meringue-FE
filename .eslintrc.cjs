@@ -13,7 +13,7 @@ module.exports = {
     ecmaVersion: "latest",
     sourceType: "module",
     project: "./tsconfig.json",
-    tsconfigRootDir: __dirname, //오류 > 추가
+    tsconfigRootDir: __dirname, 
   },
   rules: {
     'react-refresh/only-export-components': [
