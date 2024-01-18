@@ -1,8 +1,9 @@
 import './App.css';
+import UserPage from './pages/UserPage';
 
 function App() {
   return (
-    <div>Hello, World!</div>
+    <UserPage />
   );
 }
 
