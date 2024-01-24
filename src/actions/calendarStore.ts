@@ -1,11 +1,29 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable import/prefer-default-export */
+/* eslint-disable import/no-extraneous-dependencies */
+// import axios from 'axios';
+import {
+  subMonths, addMonths, getDaysInMonth,
+} from 'date-fns';
 import create from 'zustand';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { subMonths, addMonths, getDaysInMonth } from 'date-fns';
+
+// const fetchPostDates = async (month: Date) => {
+//   const res = await axios.get(`/api/posts?month=${format(month, 'yyyy-MM')}`);
+//   return res.data;
+// };
+// const fetchPostCategories = async (date: Date) => {
+//   // const res = await axios.get(`/api/posts/categories?date=${format(date, 'yyyy-MM-dd')}`);
+//   // return res.data;
+//   return ['Category1', 'Category2'];
+// };
+const fetchPostDates = async () => ['2024-01-01', '2024-01-25', '2024-02-15'];
+const fetchPostCategories = async (date: Date) => ['Category1'];
 
 type CalendarStore = {
   currentDate: Date;
   weekCalendarList: number[][];
+  posting: string[];
+  postCategories: string[];
   setCurrentDate: (date: Date) => void;
   updateMonth: (action: 'prev' | 'next') => void;
 };
@@ -13,7 +31,11 @@ type CalendarStore = {
 export const useCalendarStore = create<CalendarStore>((set) => {
   const today = new Date();
 
-  const initializeCalendar = (date: Date) => {
+  // const { data: postDates } = useQuery(['postDates', today], () => fetchPostDates(today));
+
+  const initializeCalendar = async (date: Date) => {
+    const postDates = await fetchPostDates();
+    const postCategories = await fetchPostCategories(date);
     const totalMonthDays = getDaysInMonth(date);
     const firstDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
     const lastDayOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0);
@@ -40,7 +62,12 @@ export const useCalendarStore = create<CalendarStore>((set) => {
       [],
     );
 
-    set({ currentDate: date, weekCalendarList });
+    set({
+      currentDate: date,
+      weekCalendarList,
+      posting: postDates || [],
+      postCategories: postCategories || [],
+    });
   };
 
   initializeCalendar(today);
@@ -48,6 +75,8 @@ export const useCalendarStore = create<CalendarStore>((set) => {
   return {
     currentDate: today,
     weekCalendarList: [],
+    posting: [],
+    postCategories: [],
     setCurrentDate: (date) => initializeCalendar(date),
     updateMonth: (action) => {
       set((state) => {
