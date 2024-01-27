@@ -39,6 +39,7 @@
 }
 .wrapper .header{
     height: 55px;
+    width: 100%;
 }
 .wrapper .container{
     padding: 0px;

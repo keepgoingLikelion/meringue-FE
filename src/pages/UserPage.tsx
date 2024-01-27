@@ -1,6 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import '../styles/UserPage.css';
 import { format } from 'date-fns';
+import MenuBar from '../components/Menu';
 import styles from '../styles/Layout.module.css';
 import ohYeahIcon from '../assets/moodIcons/happy.svg';
 import Calendar from '../components/Calendar/Container';
@@ -11,7 +12,7 @@ function Mypage() {
   return (
     <div className={styles.wrapper}>
       <div className={styles.header}>
-        {/* {상단바 컴포넌트} */}
+        <MenuBar />
       </div>
       <div className={styles.container}>
         <div className="profileContainer">
