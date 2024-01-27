@@ -1,6 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { format } from 'date-fns';
-// import { CaretLeftOutlined, CaretRightOutlined } from '@ant-design/icons';
 import { AiFillCaretLeft, AiFillCaretRight } from 'react-icons/ai';
 import { useCalendarStore } from '../../actions/calendarStore';
 import s from '../../styles/Calendar.module.css';

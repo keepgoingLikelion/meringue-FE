@@ -1,3 +1,4 @@
+/* 상단메뉴바  */
 .wrapper{
     height: 100%;
     display: flex;
@@ -5,7 +6,10 @@
     align-items: flex-end;
     justify-content: center;
     gap: 70%;
-    background-color:rgb(255, 255, 255, 0.3);
+    background-color:rgb(255, 255, 255, 0.15);
+    @media (min-width: 1000px) {
+        gap: 1100px;
+    }
 }
 
 .logo{
@@ -14,13 +18,17 @@
 }
 
 .button{
-    border: none;
-    background-color: none;
+    /* border: 2px solid #713c00b6;  */
+    border-radius: 100%;
+    width: 40px;
+    height: 40px;
+    margin-left: 10px;
+    margin-bottom: 5px;
+    padding: 3px;
 }
 
 .buttons{
     display: flex;
-    align-items: center;
     flex-direction: row;
-    color: #562E00;
+    color: #713c00;
 }

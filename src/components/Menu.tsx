@@ -1,9 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable import/no-extraneous-dependencies */
-import { FaRegUserCircle, FaUserCircle } from 'react-icons/fa';
-import { AiFillHome } from 'react-icons/ai';
+import { PiUserThin } from 'react-icons/pi';
 import s from '../styles/Menu.module.css';
-import logo from '../assets/basic-logo.svg';
+import logo from '../assets/basic-logo-lined.svg';
 
 function MenuBar() {
   return (
@@ -16,11 +14,7 @@ function MenuBar() {
         />
       </div>
       <div className={s.buttons}>
-        <AiFillHome
-          type="button"
-          className={s.button}
-        />
-        <FaRegUserCircle
+        <PiUserThin
           type="button"
           className={s.button}
         />
