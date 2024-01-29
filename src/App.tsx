@@ -1,8 +1,10 @@
 import './App.css';
+import UserPage from './pages/UserPage';
+// import Calendar from './components/CalContainer';
 
 function App() {
   return (
-    <div>Hello, World!</div>
+    <UserPage /> // 임시
   );
 }
 
