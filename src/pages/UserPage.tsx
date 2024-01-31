@@ -3,8 +3,9 @@ import '../styles/UserPage.css';
 import { format } from 'date-fns';
 import MenuBar from '../components/Menu';
 import styles from '../styles/Layout.module.css';
-import ohYeahIcon from '../assets/moodIcons/happy.svg';
+import profileIcon from '../assets/basic-logo-lined.svg';
 import Calendar from '../components/Calendar/Container';
+import EmotionList from '../components/EmotionList';
 import { useCalendarStore } from '../actions/calendarStore';
 
 function Mypage() {
@@ -21,7 +22,7 @@ function Mypage() {
             <h4 className="userMood">오늘의 쿠키: 오예</h4>
           </div>
           <img
-            src={ohYeahIcon}
+            src={profileIcon}
             alt="userIcon"
             className="userIcon"
           />
@@ -38,7 +39,15 @@ function Mypage() {
               <h5>오늘 날짜 카드 컴포넌트가 이곳에 표시됨 </h5>
             </div>
           </div>
-          <div className="userLogContainer" />
+          <div className="userLogContainer">
+            <EmotionList />
+            {/* <button
+              type="button"
+              onClick={handleButtonClick}
+            >
+              Process Selected Emotion
+            </button> */}
+          </div>
         </div>
       </div>
     </div>

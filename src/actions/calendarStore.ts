@@ -38,7 +38,6 @@ export const useCalendarStore = create<CalendarStore>((set) => {
 
   const fetchPostsForMonth = async (date: Date): Promise<PostSimpleDTO[]> => {
     try {
-      // Example API endpoint, replace it with your actual endpoint
       // const api = `/api/post?month=${format(date, 'yyyy-MM')}`;
       // const response = await axios.get(api);
       // return response.data;
