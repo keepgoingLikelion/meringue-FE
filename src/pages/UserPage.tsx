@@ -5,7 +5,7 @@ import MenuBar from '../components/Menu';
 import styles from '../styles/Layout.module.css';
 import profileIcon from '../assets/basic-logo-lined.svg';
 import Calendar from '../components/Calendar/Container';
-import EmotionList from '../components/EmotionList';
+// import EmotionList from '../components/EmotionList';
 import { useCalendarStore } from '../actions/calendarStore';
 
 function Mypage() {
@@ -40,13 +40,7 @@ function Mypage() {
             </div>
           </div>
           <div className="userLogContainer">
-            <EmotionList />
-            {/* <button
-              type="button"
-              onClick={handleButtonClick}
-            >
-              Process Selected Emotion
-            </button> */}
+            {/* <EmotionList /> */}
           </div>
         </div>
       </div>
