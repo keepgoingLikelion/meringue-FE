@@ -7,7 +7,7 @@ import {
 } from 'date-fns';
 import create from 'zustand';
 
-type PostDTO = {
+type PostSimpleDTO = {
   postId: number;
   createdDate: Date;
   username: string;
@@ -27,16 +27,16 @@ type CommentDTO = {
 type CalendarStore = {
   currentDate: Date;
   weekCalendarList: number[][];
-  posts: PostDTO[];
+  posts: PostSimpleDTO[];
   setCurrentDate: (date: Date) => void;
   updateMonth: (action: 'prev' | 'next') => void;
 };
 
 export const useCalendarStore = create<CalendarStore>((set) => {
   const today = new Date();
-  const fetchPostDates = async (month: Date) => ['2024-01-01', '2024-01-25', '2024-02-15'];
+  // const fetchPostDates = async (month: Date) => ['2024-01-01', '2024-01-25', '2024-02-02'];
 
-  const fetchPostsForMonth = async (date: Date): Promise<PostDTO[]> => {
+  const fetchPostsForMonth = async (date: Date): Promise<PostSimpleDTO[]> => {
     try {
       // Example API endpoint, replace it with your actual endpoint
       // const api = `/api/post?month=${format(date, 'yyyy-MM')}`;
@@ -64,7 +64,7 @@ export const useCalendarStore = create<CalendarStore>((set) => {
           postId: 3,
           createdDate: new Date('2024-02-02'),
           username: 'user3',
-          emotionType: 5, 
+          emotionType: 5,
           content: 'post',
           comments: [],
         },
@@ -76,7 +76,7 @@ export const useCalendarStore = create<CalendarStore>((set) => {
   };
 
   const initializeCalendar = async (date: Date) => {
-    const postDates = await fetchPostDates(date);
+    // const postDates = await fetchPostDates(date);
     const posts = await fetchPostsForMonth(date);
     const totalMonthDays = getDaysInMonth(date);
     const firstDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
