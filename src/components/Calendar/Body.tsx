@@ -17,8 +17,19 @@ function CalBody() {
 
   const handleDateClick = (clickedDate: Date) => {
     const formattedDate = format(clickedDate, 'yyyy-MM-dd');
-    console.log(`Clicked on ${formattedDate}`);
+    const post = posts.find((p) => format(p.createdDate, 'yyyy-MM-dd') === formattedDate);
+
+    if (post) {
+      console.log(`Today is ${formattedDate} - Emotion Type: ${post.emotionType}`);
+    } else {
+      console.log(`Nothing at ${formattedDate}`);
+    }
   };
+
+  // const handleDateClick = (clickedDate: Date) => {
+  //   const formattedDate = format(clickedDate, 'yyyy-MM-dd');
+  //   console.log(`Clicked on ${formattedDate}`);
+  // };
 
   // 사용자가 작성한 포스트의 카테고리(감정)에 따라서 아이콘 불러옴
   const getEmotionIcon = (emotionType: number): React.ReactNode => {

@@ -39,7 +39,7 @@ export const useCalendarStore = create<CalendarStore>((set) => {
   const fetchPostsForMonth = async (date: Date): Promise<PostDTO[]> => {
     try {
       // Example API endpoint, replace it with your actual endpoint
-      // const api = `/api/posts?month=${format(date, 'yyyy-MM')}`;
+      // const api = `/api/post?month=${format(date, 'yyyy-MM')}`;
       // const response = await axios.get(api);
       // return response.data;
 
@@ -57,6 +57,14 @@ export const useCalendarStore = create<CalendarStore>((set) => {
           createdDate: new Date('2024-01-25'),
           username: 'user2',
           emotionType: 2, // angry
+          content: 'post',
+          comments: [],
+        },
+        {
+          postId: 3,
+          createdDate: new Date('2024-02-02'),
+          username: 'user3',
+          emotionType: 5, 
           content: 'post',
           comments: [],
         },
