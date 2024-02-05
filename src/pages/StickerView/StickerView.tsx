@@ -64,7 +64,6 @@ export default function StickerView({ postId }: { postId: number }) {
           };
           return <img key={`${(v.top * 31 + v.left * 31) * 31}`} src={v.emojiImgUrl} alt="Sticker" style={style}/>;
         })}
-        ;
       </div>
       <TextCard
         text={postData?.content ?? 'Loading...'}

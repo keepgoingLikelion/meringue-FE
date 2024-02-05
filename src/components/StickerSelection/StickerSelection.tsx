@@ -9,6 +9,8 @@ export default function StickerSelection({ setToggleStickerButton, setIsAttachme
 : { setToggleStickerButton: React.Dispatch<React.SetStateAction<boolean>>,
   setIsAttachment: React.Dispatch<React.SetStateAction<EmojiData | null>> }) {
   const [currentCategory, setCurrentCategory] = useState<number | null>(null);
+  const [items, setItems] = useState<EmojiData[] | null>(null);
+
   const { isLoading, data } = useQuery<EmojiCategory[]>(
     {
       queryKey: ['stickerData'],
@@ -16,12 +18,13 @@ export default function StickerSelection({ setToggleStickerButton, setIsAttachme
       onSuccess: () => { setCurrentCategory(1); },
     },
   );
-  const [items, setItems] = useState<EmojiData[] | null>(null);
+
   useEffect(() => {
     if (!currentCategory) return;
     setItems(null);
     fetch(`http://localhost:3000/api/category/${currentCategory}`).then((res) => res.json()).then((v) => setItems(v));
   }, [currentCategory]);
+
   const onClickQuitButton = () => {
     setToggleStickerButton(false);
   };
