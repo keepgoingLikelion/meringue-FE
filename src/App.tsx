@@ -1,10 +1,12 @@
 import './App.css';
-import UserPage from './pages/UserPage';
+import StickerView from './pages/StickerView/StickerView.tsx';
 // import Calendar from './components/CalContainer';
 
 function App() {
   return (
-    <UserPage /> // 임시
+    <StickerView
+      postId={1}
+    />
   );
 }
 
