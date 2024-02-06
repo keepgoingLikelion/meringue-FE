@@ -1,15 +1,20 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import '../styles/UserPage.css';
+import { useEffect, useState } from 'react';
+import './UserPage.css';
 import { format } from 'date-fns';
-import MenuBar from '../components/Menu';
-import styles from '../styles/Layout.module.css';
-import profileIcon from '../assets/basic-logo-lined.svg';
-import Calendar from '../components/Calendar/Container';
-// import EmotionList from '../components/EmotionList';
-import { useCalendarStore } from '../actions/calendarStore';
+import MenuBar from '../../components/Menu/Menu';
+import styles from '../../styles/Layout.module.css';
+import profileIcon from '../../assets/basic-logo-lined.svg';
+import Calendar from '../../components/Calendar/Container';
+import { useCalendarStore } from '../../actions/calendarStore';
+import EmotionList from '../../components/EmotionList/EmotionList';
 
 function Mypage() {
   const { currentDate } = useCalendarStore();
+  const [todayDate, setTodayDate] = useState(new Date());
+  useEffect(() => {
+    setTodayDate(new Date());
+  }, [currentDate]);
   return (
     <div className={styles.wrapper}>
       <div className={styles.header}>
@@ -33,14 +38,14 @@ function Mypage() {
           </div>
           <div className="todayCardContainer">
             <h4 className="todayDate">
-              {format(currentDate, 'yyyy년 MM월 dd일')}
+              {format(todayDate, 'yyyy년 MM월 dd일')}
             </h4>
             <div className="cardContent">
               <h5>오늘 날짜 카드 컴포넌트가 이곳에 표시됨 </h5>
             </div>
           </div>
           <div className="userLogContainer">
-            {/* <EmotionList /> */}
+            <EmotionList />
           </div>
         </div>
       </div>

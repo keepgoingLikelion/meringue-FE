@@ -3,11 +3,11 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import axios from 'axios';
 import {
-  subMonths, addMonths, getDaysInMonth,
+  subMonths, addMonths, getDaysInMonth, format,
 } from 'date-fns';
 import create from 'zustand';
 
-type PostSimpleDTO = {
+type PostDTO = {
   postId: number;
   createdDate: Date;
   username: string;
@@ -27,47 +27,19 @@ type CommentDTO = {
 type CalendarStore = {
   currentDate: Date;
   weekCalendarList: number[][];
-  posts: PostSimpleDTO[];
+  posts: PostDTO[];
   setCurrentDate: (date: Date) => void;
   updateMonth: (action: 'prev' | 'next') => void;
 };
 
 export const useCalendarStore = create<CalendarStore>((set) => {
   const today = new Date();
-  // const fetchPostDates = async (month: Date) => ['2024-01-01', '2024-01-25', '2024-02-02'];
 
-  const fetchPostsForMonth = async (date: Date): Promise<PostSimpleDTO[]> => {
+  const fetchPostsForMonth = async (date: Date): Promise<PostDTO[]> => {
     try {
-      // const api = `/api/post?month=${format(date, 'yyyy-MM')}`;
-      // const response = await axios.get(api);
-      // return response.data;
-
-      return [
-        {
-          postId: 1,
-          createdDate: new Date('2024-01-01'),
-          username: 'user1',
-          emotionType: 1, // happy
-          content: 'post',
-          comments: [],
-        },
-        {
-          postId: 2,
-          createdDate: new Date('2024-01-25'),
-          username: 'user2',
-          emotionType: 2, // angry
-          content: 'post',
-          comments: [],
-        },
-        {
-          postId: 3,
-          createdDate: new Date('2024-02-02'),
-          username: 'user3',
-          emotionType: 5,
-          content: 'post',
-          comments: [],
-        },
-      ];
+      const api = `http://localhost:3000/post?year=${date.getFullYear()}&month=${date.getMonth() + 1}`;
+      const response = await axios.get(api);
+      return response.data;
     } catch (error) {
       console.error('Error fetching posts:', error);
       return [];
@@ -75,7 +47,6 @@ export const useCalendarStore = create<CalendarStore>((set) => {
   };
 
   const initializeCalendar = async (date: Date) => {
-    // const postDates = await fetchPostDates(date);
     const posts = await fetchPostsForMonth(date);
     const totalMonthDays = getDaysInMonth(date);
     const firstDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);

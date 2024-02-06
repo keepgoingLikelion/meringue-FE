@@ -4,7 +4,6 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    
 }
 .button{
     height: 36px;
@@ -15,4 +14,16 @@
 .icons{
     height: 100%;
     width: 100%;
+}
+.button {
+    text-decoration-line: none;
+    text-decoration: none;
+}
+.likedPostCount{
+    margin-top: 3px;
+}
+.count{
+    color: #51372B;
+    font-weight: 300;
+    margin-left: 14.1px;
 }

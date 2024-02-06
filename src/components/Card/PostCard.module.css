@@ -1,0 +1,54 @@
+*{
+    font-family: 'Pretendard';
+}
+
+.wrapper{
+    margin-bottom: 15px
+}
+.cream{
+    margin-bottom: -5px;
+    margin-left: 15px;
+}
+.box{
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    background-color: #FFFDF8;
+    padding: 10px;
+    overflow: hidden;
+    border: 0.07em solid rgba(113, 60, 0, 0.5);
+    border-radius: 20px;
+    @media (min-width: 1000px) {
+        width: 600px;
+    }
+}
+
+.top{
+    display: flex;
+    border-bottom: 1px #9e8669c4 solid;
+}
+.container{
+    display: flex;
+    flex-direction: row;
+}
+
+.profileDetail{
+    font-family: 'Pretendard';
+    color: #562E00;
+    margin-left: 10px;
+}
+.profileDetail h3{
+    font-weight: 500;
+    font-size: 16px;
+}
+.profileDetail h5{
+    font-weight: 400;
+    font-size: 12px;
+    color: #713c00b9;
+}
+.content{
+    font-size: 12px;
+    max-height: calc(12px * 4 + 3px * 2); 
+    overflow: hidden; 
+    margin-top: 10px;
+}

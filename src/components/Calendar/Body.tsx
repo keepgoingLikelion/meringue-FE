@@ -1,8 +1,9 @@
 /* eslint-disable react/no-array-index-key */
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { format } from 'date-fns';
+import { useNavigate } from 'react-router-dom';
 import { useCalendarStore } from '../../actions/calendarStore';
-import s from '../../styles/Calendar.module.css';
+import s from './Calendar.module.css';
 import happy from '../../assets/moodIcons/happy.svg';
 import angry from '../../assets/moodIcons/angry.svg';
 import sad from '../../assets/moodIcons/sad.svg';
@@ -11,27 +12,17 @@ import tired from '../../assets/moodIcons/tired.svg';
 import upset from '../../assets/moodIcons/upset.svg';
 
 function CalBody() {
+  const navigate = useNavigate();
   const {
     currentDate, weekCalendarList, posts,
   } = useCalendarStore();
 
-  const handleDateClick = (clickedDate: Date) => {
-    const formattedDate = format(clickedDate, 'yyyy-MM-dd');
-    const post = posts.find((p) => format(p.createdDate, 'yyyy-MM-dd') === formattedDate);
-
-    if (post) {
-      console.log(`Today is ${formattedDate} - Emotion Type: ${post.emotionType}`);
-    } else {
-      console.log(`Nothing at ${formattedDate}`);
+  const handleDateClick = (clickedDate: Date, postId?: number) => {
+    if (postId) {
+      navigate(`/post/${postId}`);
     }
   };
 
-  // const handleDateClick = (clickedDate: Date) => {
-  //   const formattedDate = format(clickedDate, 'yyyy-MM-dd');
-  //   console.log(`Clicked on ${formattedDate}`);
-  // };
-
-  // 사용자가 작성한 포스트의 카테고리(감정)에 따라서 아이콘 불러옴
   const getEmotionIcon = (emotionType: number): React.ReactNode => {
     switch (emotionType) {
       case 1:
@@ -64,23 +55,23 @@ function CalBody() {
             );
 
             const formattedDate = format(clickedDate, 'yyyy-MM-dd');
-            const hasPost = posts.find((post) => format(post.createdDate, 'yyyy-MM-dd') === formattedDate);
+            const post = posts.find((p) => format(p.createdDate, 'yyyy-MM-dd') === formattedDate);
 
             return (
               <button
                 type="button"
                 className={`${s.days}`}
                 style={day === 0 ? { visibility: 'hidden' } : {}}
-                onClick={() => handleDateClick(clickedDate)}
+                onClick={() => handleDateClick(clickedDate, post?.postId)}
                 key={dayIndex}
               >
                 <div className="days">
-                  {hasPost && (
-                  <div className={s.emotionIcons}>
-                    {getEmotionIcon(hasPost.emotionType)}
-                  </div>
+                  {post && (
+                    <div className={s.emotionIcons}>
+                      {getEmotionIcon(post.emotionType)}
+                    </div>
                   )}
-                  {!hasPost && day}
+                  {!post && day}
                 </div>
               </button>
             );

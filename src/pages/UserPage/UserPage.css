@@ -53,12 +53,12 @@ img.userIcon{
 }
 
 h4.todayDate{
+    font-family: 'KyoboHand';
     font-size: 16px;
     font-weight: 600;
 }
 .cardContent h5{
     font-family: 'Pretendard';
     color: #51372B;
-    /* font-stretch:extra-condensed; */
     font-weight: 400;
 }
