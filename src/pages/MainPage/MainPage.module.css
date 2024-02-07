@@ -1,6 +1,7 @@
 .title {
     height: 40%;
     background-color: #FFEBA4;
+    min-height: 300px;
 }
 .wave {
     width: 100%;
@@ -8,4 +9,20 @@
     background-color: #FFEBA4;
     background-repeat: repeat;
     background-image: url("/src/assets/wave.svg");
+}
+
+.wrapper {
+    position: relative;
+    top: 100px;
+    left: calc(50% - 160px);
+    width: 320px;
+    height: 186px;
+    background-color: #FFFBF2;
+    border-radius: 26px / 26px;
+    padding: 36px 36px;
+}
+.CardText {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
 }

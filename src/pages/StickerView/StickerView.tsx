@@ -66,6 +66,7 @@ export default function StickerView({ postId }: { postId: number }) {
         })}
       </div>
       <TextCard
+        className={styles.CardTextWrapper}
         text={postData?.content ?? 'Loading...'}
       />
       {toggleStickerButton ? (
