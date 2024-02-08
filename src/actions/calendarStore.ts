@@ -7,22 +7,30 @@ import {
 } from 'date-fns';
 import create from 'zustand';
 
-type PostDTO = {
+interface PostDTO {
   postId: number;
   createdDate: Date;
   username: string;
   emotionType: number;
   content: string;
   comments: CommentDTO[];
-};
+}
+interface PostSimpleDTO {
+  postId: number;
+  createdDate: Date;
+  username: string;
+  emotionType: number;
+  content: string;
+  comments: CommentDTO[];
+}
 
-type CommentDTO = {
+interface CommentDTO {
   commentId: number;
   userId: number;
   emojiImgUrl: String;
   pointX: number;
   pointY: number;
-};
+}
 
 type CalendarStore = {
   currentDate: Date;

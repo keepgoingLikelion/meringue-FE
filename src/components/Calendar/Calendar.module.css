@@ -50,3 +50,7 @@
   height: 31px;
   width: 31px;
  }
+ .emotionIcons:hover {
+  opacity: 0.85; 
+  cursor: pointer;
+}
