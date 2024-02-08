@@ -1,11 +1,11 @@
 import './App.css';
 import StickerView from './pages/StickerView/StickerView.tsx';
-import LoginView from './pages/LoginView/LoginView.tsx';
+import StartView from './pages/StartView/StartView.tsx';
 
 
 function App() {
   return (
-    <LoginView />
+    <StartView />
   );
 }
 
