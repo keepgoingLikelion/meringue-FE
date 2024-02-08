@@ -1,12 +1,11 @@
 import './App.css';
 import StickerView from './pages/StickerView/StickerView.tsx';
-// import Calendar from './components/CalContainer';
+import LoginView from './pages/LoginView/LoginView.tsx';
+
 
 function App() {
   return (
-    <StickerView
-      postId={1}
-    />
+    <LoginView />
   );
 }
 
