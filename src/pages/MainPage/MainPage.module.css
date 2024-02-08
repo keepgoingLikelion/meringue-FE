@@ -26,3 +26,13 @@
     height: 100%;
     overflow: hidden;
 }
+
+.wrap {
+    height: 100%;
+}
+.body {
+    height: calc(60% - 30px);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
