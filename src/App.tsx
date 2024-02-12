@@ -1,11 +1,15 @@
 import './App.css';
-import StickerView from './pages/StickerView/StickerView.tsx';
+import { BrowserRouter as Router, Route,Routes } from 'react-router-dom';
 import StartView from './pages/StartView/StartView.tsx';
 
 
 function App() {
   return (
-    <StartView />
+    <Router>
+      <Routes>
+        <Route path="/mystart" element={<StartView type={0} />} />
+      </Routes>
+    </Router>
   );
 }
 
