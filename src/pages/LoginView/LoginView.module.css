@@ -66,7 +66,7 @@ div{
 
 }
 
-.loginButton>button {
+/* .loginButton>button {
     padding-top: 30px;
     background-image: 'login-button.svg';
     background: no-repeat;
@@ -74,18 +74,20 @@ div{
     height: 44px;
 
 
+} */
+
+.loginButton{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.loginButton {
+.googleButton {
   position: fixed;
   bottom: 10%;
   /* padding-top: 233px; */
-  display: flex;
-  justify-content: center;
+
 }
-
-
-
 
 
 .wrapp {
