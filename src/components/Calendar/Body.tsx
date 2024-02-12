@@ -28,15 +28,15 @@ function CalBody() {
       case 1:
         return <img src={happy} alt="happyIcon" className={s.emotionIcons} />;
       case 2:
-        return <img src={angry} alt="angryIcon" className={s.emotionIcons} />;
-      case 3:
         return <img src={sad} alt="sadIcon" className={s.emotionIcons} />;
+      case 3:
+        return <img src={angry} alt="angryIcon" className={s.emotionIcons} />;
       case 4:
-        return <img src={simsim} alt="simsimIcon" className={s.emotionIcons} />;
-      case 5:
-        return <img src={tired} alt="tiredIcon" className={s.emotionIcons} />;
-      case 6:
         return <img src={upset} alt="upsetIcon" className={s.emotionIcons} />;
+      case 5:
+        return <img src={simsim} alt="simsimIcon" className={s.emotionIcons} />;
+      case 6:
+        return <img src={tired} alt="tiredIcon" className={s.emotionIcons} />;
 
       default:
         return null;

@@ -27,7 +27,12 @@ function PostList({ emotionType }: PostListProps): JSX.Element {
         </div>
       ) : (
         <div className="empty">
-          <h4 style={{ fontFamily: 'KyoBoHand', fontWeight: '300', color: 'grey' }}>두고 간 머랭쿠키가 없어요.</h4>
+          <h3 style={{
+            fontFamily: 'KyoBoHand', fontWeight: '300', color: 'grey', marginTop: '100px',
+          }}
+          >
+            두고 간 머랭쿠키가 없어요😓
+          </h3>
         </div>
       )}
     </div>

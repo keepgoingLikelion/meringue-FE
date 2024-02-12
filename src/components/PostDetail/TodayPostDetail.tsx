@@ -1,7 +1,9 @@
 /* eslint-disable react/no-array-index-key */
 import { useEffect } from 'react';
-import { format } from 'date-fns';
 import { useTodayPostStore } from '../../actions/todayPost';
+import s from './PostDetail.module.css';
+import getThemeColor from '../../utils/getThemeColor';
+import theme from '../../styles/ThemeColor.module.css';
 
 function TodayPostDetail() {
   const { todayPost, fetchTodayPost } = useTodayPostStore();
@@ -14,18 +16,18 @@ function TodayPostDetail() {
   }
 
   return (
-    <div>
-      <p>{todayPost.postId}</p>
-      <p>{format(todayPost.createdDate, 'yyyy-MM-dd')}</p>
-      <p>{todayPost.content}</p>
-      <p>
-        {todayPost.comments.map((comment, idx) => (
+    <div className={`${s.wrapper} ${theme[getThemeColor(todayPost.emotionType)]}`}>
+      <div className={s.card}>
+        <h4>{todayPost.content}</h4>
+      </div>
+      {/* <p>
+        {post.comments.map((comment, idx) => (
           <div key={idx}>
             <h4>comment ID:</h4>
             <p>{comment.commentId}</p>
           </div>
         ))}
-      </p>
+      </p> */}
     </div>
   );
 }

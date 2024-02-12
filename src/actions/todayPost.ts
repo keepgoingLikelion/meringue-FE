@@ -9,7 +9,7 @@ interface PostDTO {
   username: string;
   emotionType: number;
   content: string;
-  comments: Comment[];
+  comment: Comment[];
 }
 interface Comment {
   commentId: number;

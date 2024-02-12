@@ -3,7 +3,10 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { format } from 'date-fns';
+import { LuLoader } from 'react-icons/lu';
+import s from './PostDetail.module.css';
+import getThemeColor from '../../utils/getThemeColor';
+import theme from '../../styles/ThemeColor.module.css';
 
 interface Post {
   postId: number;
@@ -39,22 +42,19 @@ function PostDetail() {
   }, [postId]);
 
   if (!post) {
-    return <div>Loading...</div>;
+    return (
+      <div className={s.wrapper}>
+        <LuLoader style={{ color: 'lightgrey', width: '30px', height: '30px' }} />
+        ;
+      </div>
+    );
   }
 
   return (
-    <div>
-      <p>{post.postId}</p>
-      <p>{format(post.createdDate, 'yyyy-MM-dd')}</p>
-      <p>{post.content}</p>
-      <p>
-        {post.comments.map((comment, idx) => (
-          <div key={idx}>
-            <h4>comment ID:</h4>
-            <p>{comment.commentId}</p>
-          </div>
-        ))}
-      </p>
+    <div className={`${s.wrapper} ${theme[getThemeColor(post.emotionType)]}`}>
+      <div className={s.card}>
+        <h4>{post.content}</h4>
+      </div>
     </div>
   );
 }

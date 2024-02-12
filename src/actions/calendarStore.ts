@@ -15,14 +15,6 @@ interface PostDTO {
   content: string;
   comments: CommentDTO[];
 }
-interface PostSimpleDTO {
-  postId: number;
-  createdDate: Date;
-  username: string;
-  emotionType: number;
-  content: string;
-  comments: CommentDTO[];
-}
 
 interface CommentDTO {
   commentId: number;

@@ -18,9 +18,9 @@
     overflow: hidden;
     border: 0.07em solid rgba(113, 60, 0, 0.5);
     border-radius: 20px;
-    @media (min-width: 1000px) {
+    /* @media (min-width: 1000px) {
         width: 600px;
-    }
+    } */
 }
 
 .top{

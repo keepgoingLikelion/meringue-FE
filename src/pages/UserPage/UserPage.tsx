@@ -1,5 +1,4 @@
-/* eslint-disable import/no-extraneous-dependencies */
-import { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
 import MenuBar from '../../components/Menu/Menu';
@@ -11,50 +10,90 @@ import { useCalendarStore } from '../../actions/calendarStore';
 import EmotionList from '../../components/EmotionList/EmotionList';
 import s from './UserPage.module.css';
 import theme from '../../styles/ThemeColor.module.css';
+import getThemeColor from '../../utils/getThemeColor';
+import { fetchUserNickname, updateNickname } from '../../utils/nickname';
 
 function Mypage() {
   const { currentDate } = useCalendarStore();
   const { todayPost, fetchTodayPost } = useTodayPostStore();
   const [todayDate, setTodayDate] = useState(new Date());
+  const [isEditingName, setIsEditingName] = useState(false);
+  const [newName, setNewName] = useState('');
+  const [userName, setUserName] = useState('');
 
   useEffect(() => {
     setTodayDate(new Date());
-  }, [currentDate]);
-  useEffect(() => {
     fetchTodayPost();
-  }, [fetchTodayPost]);
+    fetchUserNickname().then((nickname) => setUserName(nickname));
+  }, [currentDate, fetchTodayPost]);
+
   if (!todayPost) {
-    return <div>오늘 만든 쿠키가 없어요.</div>;
+    return <div>오늘 작성한 쿠키가 없어요 </div>;
   }
-  const changeThemeColor = (emotionType: number): string => {
-    switch (emotionType) {
-      case 1:
-        return 'themeHappy';
-      case 2:
-        return 'themeSad';
-      case 3:
-        return 'themeAngry';
-      case 4:
-        return 'themeUpset';
-      case 5:
-        return 'themeSimsim';
-      case 6:
-        return 'themeTired';
-      default:
-        return 'themeHappy';
-    }
+
+  const changeTodayMood = (emotionType: number): string => {
+    const moods = ['오예', '뿌앵', '부글부글', '까칠', '심심', '너덜너덜'];
+    return moods[emotionType - 1] || '';
+  };
+
+  const handleNameEdit = () => {
+    setIsEditingName(true);
+  };
+
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNewName(e.target.value);
+  };
+
+  const handleSaveName = () => {
+    setUserName(newName);
+    setIsEditingName(false);
+    updateNickname(newName);
   };
 
   return (
-    <div className={`${styles.wrapper} ${theme[changeThemeColor(todayPost.emotionType)]}`}>
+    <div className={`${styles.wrapper} ${theme[getThemeColor(todayPost.emotionType)]}`}>
       <div className={styles.header}>
         <MenuBar />
       </div>
       <div className={styles.container}>
         <div className={s.profileContainer}>
           <div className={s.profileContent}>
-            <h2 className={s.userName}>내이름은홍길동</h2>
-            <h4 className={s.userMood}>오늘의 쿠키: 오예</h4>
+            <div className={s.wr}>
+              {isEditingName ? (
+                <>
+                  <input
+                    type="text"
+                    value={newName}
+                    onChange={handleNameChange}
+                  />
+                  <button
+                    type="button"
+                    onClick={handleSaveName}
+                  >
+                    save
+                  </button>
+                </>
+              ) : (
+                <>
+                  <h2 className={s.userName}>{userName}</h2>
+                  <button
+                    type="button"
+                    className={s.setNameButton}
+                    onClick={handleNameEdit}
+                  >
+                    edit
+                  </button>
+                </>
+              )}
+            </div>
+            <h4 className={s.userMood}>
+              오늘의 쿠키:
+              {' '}
+              <span style={{ fontWeight: 'bold' }}>
+                {changeTodayMood(todayPost.emotionType)}
+                {' '}
+              </span>
+            </h4>
           </div>
           <img
             src={profileIcon}
@@ -93,22 +132,3 @@ function Mypage() {
 }
 
 export default Mypage;
-
-export const getThemeColor = (emotionType: number): string => {
-  switch (emotionType) {
-    case 1:
-      return 'themeHappy';
-    case 2:
-      return 'themeSad';
-    case 3:
-      return 'themeAngry';
-    case 4:
-      return 'themeUpset';
-    case 5:
-      return 'themeSimsim';
-    case 6:
-      return 'themeTired';
-    default:
-      return 'themeHappy';
-  }
-};

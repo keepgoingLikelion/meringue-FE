@@ -5,35 +5,49 @@
     height: 175px;
     width: 100%;
     justify-content: center;
-    gap: 55%;
+    gap: 50%;
     @media (min-width: 1000px) {
-        gap: 75%;
+        gap: 70%;
     }
+    
 }
 .profileContent{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 85px;
     float: left;
     color: var(--text-brown-color);
+    margin-bottom: 25px;
 }
-.calContainer{
+.wr{
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    height: 40px;
+}
+.setNameButton{
+    background-color: #ffffff79;
+    border: none;
+    border-radius: 20px;
+    width: 35px;
+    color: var(--point-brown-color);
+    margin-left: 5px;
 }
 h2.userName{
     font-family: 'KyoboHand';
     font-size: 28px;
     font-weight: 500;
+    margin-top: -10px;
+    float: left;
 }
 h4.userMood{
     font-size: 16px;
     font-weight: 400;
 }
 img.userIcon{
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+}
+.calContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 .todayCardContainer{
     display: flex;
