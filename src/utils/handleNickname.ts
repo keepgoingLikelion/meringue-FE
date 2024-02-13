@@ -1,5 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import axios, { AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 import instance, { APIResponse } from '../interface/instance';
 
 interface UserInfo {
@@ -8,7 +8,7 @@ interface UserInfo {
 }
 export async function fetchUserNickname() {
   try {
-    const res: AxiosResponse<APIResponse<UserInfo>> = await instance.get('user');
+    const res: AxiosResponse<APIResponse<UserInfo>> = await instance.get('user/me');
     console.log('feth:', res.data.data.nickname);
     return res.data.data.nickname;
   } catch (error) {
@@ -19,7 +19,7 @@ export async function fetchUserNickname() {
 
 export async function updateNickname(newNickname: string) {
   try {
-    const response = await axios.post('/api/updateNickname', { newNickname });
+    const response = await instance.post('updateNickname', { newNickname });
     if (response.status === 200) {
       console.log('Nickname updated successfully');
     } else {
