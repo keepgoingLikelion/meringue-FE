@@ -9,6 +9,10 @@ import create from 'zustand';
 import instance, { APIResponse } from '../interface/instance';
 import { PostSimpleDTO } from '../interface/postInterface.ts';
 
+interface PostData{
+  posts: PostSimpleDTO[];
+}
+
 type CalendarStore = {
   currentDate: Date;
   weekCalendarList: number[][];
@@ -22,7 +26,7 @@ export const useCalendarStore = create<CalendarStore>((set) => {
 
   const fetchPostsForMonth = async (date: Date): Promise<PostSimpleDTO> => {
     try {
-      const api = `/post/mypage/post?year=${date.getFullYear()}&month=${date.getMonth() + 1}`;
+      const api = `/post/mypage?year=${date.getFullYear()}&month=${date.getMonth() + 1}`;
       const res: AxiosResponse<APIResponse<PostSimpleDTO>> = await instance.get(api);
       return res.data.data;
     } catch (error) {

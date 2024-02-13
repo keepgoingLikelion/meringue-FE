@@ -12,7 +12,7 @@ import { useAccessToken } from './utils/getToken';
 
 axios.defaults.baseURL = 'http://localhost:8080/';
 axios.defaults.withCredentials = true;
-axios.defaults.headers.common.Authorization = `Bearer ${useAccessToken}`;
+axios.defaults.headers.common.Authorization = `Bearer ${useAccessToken()}`;
 
 function App() {
   return (

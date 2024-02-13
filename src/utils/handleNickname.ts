@@ -8,9 +8,8 @@ interface UserInfo {
 }
 export async function fetchUserNickname() {
   try {
-    const res: AxiosResponse<APIResponse<UserInfo>> = await instance.get('user/me');
-    console.log('feth:', res.data.data.nickname);
-    return res.data.data.nickname;
+    const res: { data : UserInfo } = await instance.get('user/me');
+    return res.data.nickname;
   } catch (error) {
     console.error('Error fetching nickname:', error);
     return null;

@@ -25,7 +25,7 @@ const instance: CustomInstance = axios.create({
 
 // 요청용 인터셉터
 instance.interceptors.request.use((req) => {
-  req.headers.Authorization = `Bearer ${useAccessToken}`;
+  req.headers.Authorization = `Bearer ${useAccessToken()}`;
   return req;
 }, (error) => Promise.reject(error));
 
