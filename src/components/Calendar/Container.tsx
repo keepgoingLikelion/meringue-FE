@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import CalHeader from './Header';
 import CalBody from './Body';
 import { useCalendarStore } from '../../actions/calendarStore';
-import s from '../../styles/Calendar.module.css';
+import s from './Calendar.module.css';
 
 function CalendarApp() {
   const { setCurrentDate } = useCalendarStore();
