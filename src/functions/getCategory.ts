@@ -51,3 +51,7 @@ export function getCategoryDataList() {
     },
   ];
 }
+
+export function getCategoryData(type: number) {
+  return getCategoryDataList().find((v) => v.type === type);
+}
