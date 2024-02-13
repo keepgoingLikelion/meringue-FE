@@ -1,18 +1,14 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable import/prefer-default-export */
-/* eslint-disable import/no-extraneous-dependencies */
-import { AxiosResponse } from 'axios';
 import {
   subMonths, addMonths, getDaysInMonth,
 } from 'date-fns';
 import create from 'zustand';
-import instance, { APIResponse } from '../interface/instance';
-import { PostSimpleDTO } from '../interface/postInterface.ts';
+import instance from '../interface/instance';
+import { PostSimpleDTO, PostsDTO } from '../interface/postInterface.ts';
 
 type CalendarStore = {
   currentDate: Date;
   weekCalendarList: number[][];
-  posts: PostSimpleDTO;
+  postings: PostSimpleDTO[];
   setCurrentDate: (date: Date) => void;
   updateMonth: (action: 'prev' | 'next') => void;
 };
@@ -20,21 +16,14 @@ type CalendarStore = {
 export const useCalendarStore = create<CalendarStore>((set) => {
   const today = new Date();
 
-  const fetchPostsForMonth = async (date: Date): Promise<PostSimpleDTO> => {
+  const fetchPostsForMonth = async (date: Date): Promise<PostSimpleDTO[]> => {
     try {
-      const api = `/post/mypage/post?year=${date.getFullYear()}&month=${date.getMonth() + 1}`;
-      const res: AxiosResponse<APIResponse<PostSimpleDTO>> = await instance.get(api);
-      return res.data.data;
+      const api = `/post/mypage?year=${date.getFullYear()}&month=${date.getMonth() + 1}`;
+      const res: { data: PostsDTO } = await instance.get(api);
+      return res.data.posts;
     } catch (error) {
       console.error('Error fetching posts:', error);
-      return {
-        postId: -1,
-        createdDate: new Date(),
-        userId: -1,
-        username: '',
-        emotionType: -1,
-        content: '',
-      };
+      return [];
     }
   };
 
@@ -64,7 +53,7 @@ export const useCalendarStore = create<CalendarStore>((set) => {
     set({
       currentDate: date,
       weekCalendarList,
-      posts,
+      postings: posts,
     });
   };
 
@@ -73,14 +62,7 @@ export const useCalendarStore = create<CalendarStore>((set) => {
   return {
     currentDate: today,
     weekCalendarList: [],
-    posts: {
-      postId: -1,
-      createdDate: new Date(),
-      userId: -1,
-      username: '',
-      emotionType: -1,
-      content: '',
-    },
+    postings: [],
     setCurrentDate: (date) => initializeCalendar(date),
     updateMonth: (action) => {
       set((state) => {

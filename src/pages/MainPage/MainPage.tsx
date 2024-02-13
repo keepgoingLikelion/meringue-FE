@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { useQuery } from 'react-query';
 import styles from './MainPage.module.css';
 import UserTextCard from '../../components/UserTextCard/UserTextCard.tsx';
-import { PostSimpleDTO } from '../../interface/postInterface.ts';
+import { PostSDTO } from '../../interface/postInterface.ts';
 import filterButton from '../../assets/filter-button.svg';
 import { getCategoryData, getCategoryDataList } from '../../functions/getCategory.ts';
 import QuitButton from '../../assets/quit-button.svg';
@@ -16,12 +17,13 @@ function MyText({ content }: { content: string }) {
   );
 }
 function UserPostList({ ignoreList }: { ignoreList: number[] }) {
-  const { isLoading, data } = useQuery<PostSimpleDTO[]>(
+  const { isLoading, data } = useQuery<PostSDTO[]>(
     {
       queryKey: ['backgroundStickers'],
-      queryFn: () => fetch('http://localhost:3000/api/post/simple').then((res) => res.json()),
+      queryFn: () => axios.get<{posts: PostSDTO[]}>('/api/post/postList?category=1,2,3,4,5,6').then((v) => v.data.posts),
     },
   );
+
 
   return (
     <div className={styles.contents}>
@@ -47,7 +49,7 @@ function FilterInput({
 
   return (
     <div className={styles.inputGroup}>
-      <input checked={isChecked} onChange={onChange} type="checkbox" id={type.toString()} style={{ marginRight: '9px', marginBottom: '2px' }} />
+      <input checked={!isChecked} onChange={onChange} type="checkbox" id={type.toString()} style={{ marginRight: '9px', marginBottom: '2px' }} />
       <div className={styles.circle} style={{ marginRight: '8px', marginTop: '1px', backgroundColor: color }} />
       <span>{name}</span>
     </div>
