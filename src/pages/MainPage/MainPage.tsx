@@ -6,7 +6,7 @@ import { PostSimpleDTO } from '../../interface/postInterface.ts';
 import filterButton from '../../assets/filter-button.svg';
 import { getCategoryData, getCategoryDataList } from '../../functions/getCategory.ts';
 import QuitButton from '../../assets/quit-button.svg';
-import Menu from '../../components/Menu.tsx';
+import Menu from '../../components/Menu/Menu.tsx';
 
 function MyText({ content }: { content: string }) {
   return (

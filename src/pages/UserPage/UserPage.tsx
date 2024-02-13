@@ -10,7 +10,7 @@ import { useCalendarStore } from '../../actions/calendarStore';
 import EmotionList from '../../components/EmotionList/EmotionList';
 import s from './UserPage.module.css';
 import theme from '../../styles/ThemeColor.module.css';
-import getThemeColor from '../../utils/getThemeColor';
+import getThemeColor from '../../utils/GetThemeColor.tsx';
 import { fetchUserNickname, updateNickname } from '../../utils/handleNickname';
 
 function Mypage() {
@@ -24,7 +24,7 @@ function Mypage() {
   useEffect(() => {
     setTodayDate(new Date());
     fetchTodayPost();
-    fetchUserNickname().then((nickname) => setUserName(nickname));
+    fetchUserNickname().then((nickname) => setUserName(nickname ?? ""));
   }, [currentDate, fetchTodayPost]);
 
   if (!todayPost) {

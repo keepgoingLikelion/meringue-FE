@@ -7,7 +7,7 @@ import {
 } from 'date-fns';
 import create from 'zustand';
 import instance, { APIResponse } from '../interface/instance';
-import { PostSimpleDTO } from '../interface/PostInterface';
+import { PostSimpleDTO } from '../interface/postInterface.ts';
 
 type CalendarStore = {
   currentDate: Date;

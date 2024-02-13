@@ -3,7 +3,7 @@ import { useQuery } from 'react-query';
 import { AxiosResponse } from 'axios';
 import useLikedPostsStore from '../../actions/likedPostsStore';
 import instance, { APIResponse } from '../../interface/instance';
-import { PostSimpleDTO } from '../../interface/PostInterface';
+import { PostSimpleDTO } from '../../interface/postInterface.ts';
 
 const fetchLikedPosts = async (emotionType: number) => {
   try {

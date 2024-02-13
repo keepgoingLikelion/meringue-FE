@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { AiOutlineClose } from 'react-icons/ai';
 import PostList from '../../components/LikedPostsList/PostList';
@@ -6,7 +6,7 @@ import s from './UserLog.module.css';
 import theme from '../../styles/ThemeColor.module.css';
 import MenuBar from '../../components/Menu/Menu';
 import { useTodayPostStore } from '../../actions/todayPost';
-import getThemeColor from '../../utils/getThemeColor';
+import getThemeColor from '../../utils/GetThemeColor.tsx';
 
 function UserLog() {
   const { emotionType } = useParams<{ emotionType?: string }>();
