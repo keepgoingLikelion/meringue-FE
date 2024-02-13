@@ -5,7 +5,7 @@ import { getCategoryImg } from '../../functions/getCategory.ts';
 
 const getDateToString = (date: Date) => {
   const currentDate = new Date(date.toString());
-  const m = currentDate.getMonth();
+  const m = currentDate.getMonth() + 1;
   const d = currentDate.getDate();
   return `${currentDate.getFullYear()}.${m >= 10 ? m : `0${m}`}.${d >= 10 ? d : `0${d}`}`;
 };
