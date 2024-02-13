@@ -63,7 +63,7 @@
     width: 430px;
     height: 100%;
     background-repeat: no-repeat;
-    background-image: url("creamBack.svg");
+    background-image: url("/src/assets/creamBack.svg");
 
 }
 
@@ -126,7 +126,7 @@
     background-image: 
         linear-gradient(to right, #FFFBF2 10px, transparent 10px),
         linear-gradient(to left, #FFFBF2 10px, transparent 10px),
-        url(TextLine.svg);
+        url("/src/assets/TextLine.svg");
     background-size: 100% 1.80em;
     background-origin: calc(100%-0.90em);
     background-color: #FFFBF2;
@@ -177,8 +177,8 @@
 }
 
 .checkBox {
-
-    display: inline-block;
+    display: none;
+    /* display: inline-block; */
     width: 16.21px;
     height: 16.21px;
     border: 0.9px;
@@ -187,11 +187,7 @@
     position: relative;
 }
 
-input[class="checkBox"] {
-    display: none;
-}
-
-input[class="checkBox"] + label{
+.checkBox + label{
     padding-bottom: 3.2%;
 
     display: inline-block;
@@ -199,10 +195,10 @@ input[class="checkBox"] + label{
     height: 16.21px;
     /* border: 0.9px solid #562E00; */
     position: relative;
-    background: url(unchecked.svg)  no-repeat;
+    background: url("/src/assets/unchecked.svg")  no-repeat;
 }
 
-input[class="checkBox"]:checked + label::after{
+.checkBox:checked + label::after{
     content: '';
     font-size: 0; 
     width: 16.21px;
@@ -212,7 +208,7 @@ input[class="checkBox"]:checked + label::after{
     left: 0;
     top: 0;
 
-    background: url(checked.svg)  no-repeat;
+    background: url("/src/assets/checked.svg")  no-repeat;
 }
 
 li{
