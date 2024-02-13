@@ -6,3 +6,7 @@ export interface PostSimpleDTO {
   emotionType: number;
   content: string;
 }
+
+export interface PostsDTO{
+  posts: PostSimpleDTO[];
+}

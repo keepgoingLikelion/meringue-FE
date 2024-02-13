@@ -1,17 +1,9 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable import/prefer-default-export */
-/* eslint-disable import/no-extraneous-dependencies */
-import { AxiosResponse } from 'axios';
 import {
   subMonths, addMonths, getDaysInMonth,
 } from 'date-fns';
 import create from 'zustand';
-import instance, { APIResponse } from '../interface/instance';
-import { PostSimpleDTO } from '../interface/postInterface.ts';
-
-interface PostsDTO{
-  posts: PostSimpleDTO[];
-}
+import instance from '../interface/instance';
+import { PostSimpleDTO, PostsDTO } from '../interface/postInterface.ts';
 
 type CalendarStore = {
   currentDate: Date;

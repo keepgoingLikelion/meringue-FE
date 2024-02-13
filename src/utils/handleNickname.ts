@@ -1,6 +1,4 @@
-/* eslint-disable import/no-extraneous-dependencies */
-import { AxiosResponse } from 'axios';
-import instance, { APIResponse } from '../interface/instance';
+import instance from '../interface/instance';
 
 interface UserInfo {
   email: 'string',

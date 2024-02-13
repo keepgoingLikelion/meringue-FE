@@ -1,12 +1,11 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable import/no-extraneous-dependencies */
 import { useEffect, useState } from 'react';
-import { AxiosResponse } from 'axios';
 import { useParams } from 'react-router-dom';
 import { LuLoader } from 'react-icons/lu';
 import s from './PostDetail.module.css';
 import PostView from '../PostView/PostView.tsx';
-import instance, { APIResponse } from '../../interface/instance';
+import instance from '../../interface/instance';
 import { PostData } from '../../interface/emojiInterface';
 
 function PostDetail() {

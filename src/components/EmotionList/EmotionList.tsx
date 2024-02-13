@@ -4,25 +4,31 @@ import { Link } from 'react-router-dom';
 import s from './EmotionList.module.css';
 import GetEmotionIcon from '../../utils/GetEmotionIcon.tsx';
 import useLikedPosts from '../LikedPostsList/useLikedPosts';
+import instance from '../../interface/instance.ts';
+import { useEffect, useState } from 'react';
 
 const queryClient = new QueryClient();
 
 interface Props {
   emotionType: number;
 }
-
-function LikedPostCount({ emotionType }: Props): JSX.Element {
-  const { likedPosts } = useLikedPosts(emotionType);
-
-  return (
-    <div className={s.likedPostCount}>
-      <h5 className={s.count}>{likedPosts ? likedPosts.length : 0}</h5>
-    </div>
-  );
-}
+type LikedPostCounts = number[];
 
 function EmotionList() {
+  const [countList, setCountList] = useState<LikedPostCounts| null>(null);
   const emotions = [1, 2, 3, 4, 5, 6];
+
+  useEffect(() => {
+    const fetchList = async () => {
+      try{
+        const res: { data: LikedPostCounts } = await instance.get('/post/myLikeCountList');
+        setCountList(res.data);
+      } catch(error){
+        console.error('Error fetching: ', error);
+      }
+    };
+    fetchList();
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -30,9 +36,10 @@ function EmotionList() {
         {emotions.map((emotionType) => (
           <Link to={`/myLog/${emotionType}`} key={emotionType} className={s.button}>
             <GetEmotionIcon type={emotionType} />
-            <LikedPostCount emotionType={emotionType} />
+            {countList && <span className={s.count} style={{fontSize: '12px', color: '#51372B', marginTop: '3px'}}>{countList[emotionType - 1]}</span>}
           </Link>
         ))}
+        
       </div>
     </QueryClientProvider>
   );
