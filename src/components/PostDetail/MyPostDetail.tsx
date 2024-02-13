@@ -36,7 +36,7 @@ function PostDetail() {
   }
 
   return (
-    <PostView stickers={post.emoji} content={post.content} type={post.emotionType} />
+    <PostView stickers={post.emojis} content={post.content} type={post.emotionType} />
   );
 }
 

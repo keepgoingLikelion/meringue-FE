@@ -14,7 +14,11 @@ function TodayPostDetail() {
   }
 
   return (
-    <PostView stickers={todayPost.emoji} content={todayPost.content} type={todayPost.emotionType} />
+    <PostView
+      stickers={todayPost.emojis}
+      content={todayPost.content}
+      type={todayPost.emotionType}
+    />
   );
 }
 

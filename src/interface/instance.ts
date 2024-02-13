@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import axios from 'axios';
-import { useAccessToken } from '../actions/auth';
+import { useAccessToken } from '../utils/getToken';
 
 export interface APIResponse<T = any> {
   code: number;
@@ -15,8 +15,10 @@ interface CustomInstance extends AxiosInstance {
     config?: AxiosRequestConfig<D>,
   ): Promise<R>;
 }
+
+// Axios 인스턴스 생성
 const instance: CustomInstance = axios.create({
-  baseURL: 'http://localhost:3000/api/',
+  baseURL: 'http://localhost:8080/api/',
   withCredentials: true,
   headers: {},
 });
