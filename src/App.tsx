@@ -9,6 +9,7 @@ import PostDetail from './components/PostDetail/MyPostDetail';
 import LikedPostDetail from './components/PostDetail/LikedPostDetail';
 import TodayPostDetail from './components/PostDetail/TodayPostDetail';
 import { useAccessToken } from './utils/getToken';
+import './styles/Common.css';
 
 axios.defaults.baseURL = 'http://localhost:8080/';
 axios.defaults.withCredentials = true;
