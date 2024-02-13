@@ -2,12 +2,18 @@ import style from './LoginView.module.css'
 import basicLogoLined from '../../assets/basic-logo-lined.svg'
 import questionMark from '../../assets/question-mark.svg'
 import loginButton from '../../assets/login-button.svg'
-import React from 'react';
-const googleURL = 'http://localhost:8080/login/oauth2/code/google';
+import React, { useEffect } from 'react';
+const googleURL = 'http://localhost:8080/login';
 
 
 export default function LoginView (){
-
+    
+    useEffect(() => {
+        window.location.href = googleURL;
+        if(onclick) {window.open(googleURL)};
+    }, [])
+    
+    
     return (
         <div className={style.wrapp}>
          <div className={style.logoContainer}>
@@ -20,7 +26,7 @@ export default function LoginView (){
         <div className={style.mess2}>머랭<img src={questionMark} title="question-mark"/></div>
 
         <div className={style.loginButton}>
-                <img onClick={()=>{window.open(googleURL)}} className={style.googleButton} src={loginButton}/>
+                {/* <img onClick={()=>{window.open(googleURL)}} className={style.googleButton} src={loginButton}/> */}
         </div>
 
         </div>
