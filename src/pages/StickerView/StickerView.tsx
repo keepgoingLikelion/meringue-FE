@@ -10,6 +10,7 @@ import PostView from '../../components/PostView/PostView.tsx';
 import { STICKER_SIZE } from '../../const/CONST.ts';
 import Menu from '../../components/Menu/Menu.tsx';
 import { getCategoryData } from '../../functions/getCategory.ts';
+import BackButton from '../../assets/back-button.svg';
 
 export default function StickerView({ postId }: { postId: number }) {
   const [stickers, setStickers] = useState<EmojiDetailData[]>([]);
@@ -59,12 +60,14 @@ export default function StickerView({ postId }: { postId: number }) {
     });
   };
 
+  const emojiColor = getCategoryData(postData?.emotionType ?? 1)?.color ?? '#000000';
   return (
     <>
       <div ref={cardTextRef} className={styles.clickDiv} role="presentation" onClick={onClickDiv}>
-        <div style={{ width: '100%', backgroundColor: getCategoryData(postData?.emotionType ?? -1)?.color ?? '#000000' }}>
+        <div style={{ width: '100%', backgroundColor: emojiColor }}>
           <Menu />
         </div>
+        <img className={styles.backButton} src={BackButton} alt="back-button" style={{ backgroundColor: emojiColor }} />
         <PostView type={postData?.emotionType ?? 1} stickers={stickers} content={postData?.content ?? 'Loading...'} />
       </div>
       {toggleStickerButton ? (
