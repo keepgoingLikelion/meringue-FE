@@ -1,5 +1,5 @@
 import styles from './UserTextCard.module.css';
-import { PostSimpleDTO } from '../../interface/postInterface.ts';
+import { PostSDTO } from '../../interface/postInterface.ts';
 import Happy from '../../assets/moodIcons/happy.svg';
 import { getCategoryImg } from '../../functions/getCategory.ts';
 
@@ -10,7 +10,7 @@ const getDateToString = (date: Date) => {
   return `${currentDate.getFullYear()}.${m >= 10 ? m : `0${m}`}.${d >= 10 ? d : `0${d}`}`;
 };
 
-export default function UserTextCard({ data }: { data: PostSimpleDTO }) {
+export default function UserTextCard({ data }: { data: PostSDTO }) {
   return (
     <div className={styles.wrap}>
       <div className={styles.profile}>
@@ -18,7 +18,7 @@ export default function UserTextCard({ data }: { data: PostSimpleDTO }) {
           <img width="32px" height="32px" src={getCategoryImg(data.emotionType) ?? Happy} alt="happy" />
           <div>
             <p className={styles.username}>{data.username}</p>
-            <p className={styles.postdate}>{getDateToString(data.createdDate)}</p>
+            <p className={styles.postdate}>{data.createdDate}</p>
           </div>
         </div>
         <div className={styles.commentCount}>

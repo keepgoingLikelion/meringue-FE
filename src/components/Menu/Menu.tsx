@@ -7,11 +7,13 @@ function MenuBar() {
   return (
     <div className={s.wrapper}>
       <div className={s.logoPart}>
+        <Link to="/main">
         <img
           src={logo}
           className={s.logo}
           alt="logo"
         />
+          </Link>
       </div>
       <div className={s.buttons}>
         <Link to="/mypage" className={s.buttons}>

@@ -1,7 +1,5 @@
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable import/prefer-default-export */
 import { create } from 'zustand';
-import instance, { APIResponse } from '../interface/instance';
+import instance from '../interface/instance';
 import { PostData } from '../interface/emojiInterface';
 
 type TodayPostStore = {
