@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import CalHeader from './Header';
 import CalBody from './Body';
 import { useCalendarStore } from '../../actions/calendarStore';

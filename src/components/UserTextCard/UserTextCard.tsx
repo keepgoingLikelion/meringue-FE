@@ -1,13 +1,13 @@
 import styles from './UserTextCard.module.css';
 import { PostSimpleDTO } from '../../interface/postInterface.ts';
 import Happy from '../../assets/moodIcons/happy.svg';
-import {getCategoryImg} from "../../functions/getCategory.ts";
+import { getCategoryImg } from '../../functions/getCategory.ts';
 
 const getDateToString = (date: Date) => {
-  date = new Date(date.toString());
-  const m = date.getMonth();
-  const d = date.getDate();
-  return `${date.getFullYear()}.${m >= 10 ? m : `0${m}`}.${d >= 10 ? d : `0${d}`}`;
+  const currentDate = new Date(date.toString());
+  const m = currentDate.getMonth();
+  const d = currentDate.getDate();
+  return `${currentDate.getFullYear()}.${m >= 10 ? m : `0${m}`}.${d >= 10 ? d : `0${d}`}`;
 };
 
 export default function UserTextCard({ data }: { data: PostSimpleDTO }) {

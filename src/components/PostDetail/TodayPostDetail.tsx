@@ -2,7 +2,7 @@
 import { useEffect } from 'react';
 import { useTodayPostStore } from '../../actions/todayPost';
 import s from './PostDetail.module.css';
-import getThemeColor from '../../utils/getThemeColor';
+import getThemeColor from '../../utils/GetThemeColor.tsx';
 import theme from '../../styles/ThemeColor.module.css';
 
 function TodayPostDetail() {

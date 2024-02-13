@@ -5,7 +5,7 @@ import { AxiosResponse } from 'axios';
 import { useParams } from 'react-router-dom';
 import { LuLoader } from 'react-icons/lu';
 import s from './PostDetail.module.css';
-import getThemeColor from '../../utils/getThemeColor';
+import getThemeColor from '../../utils/GetThemeColor.tsx';
 import theme from '../../styles/ThemeColor.module.css';
 import instance, { APIResponse } from '../../interface/instance';
 

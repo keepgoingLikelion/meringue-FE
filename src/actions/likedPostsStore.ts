@@ -1,5 +1,5 @@
 import create from 'zustand';
-import { PostSimpleDTO } from '../interface/PostInterface';
+import { PostSimpleDTO } from '../interface/postInterface.ts';
 
 interface LikedPostsStore {
   likedPosts: PostSimpleDTO[];

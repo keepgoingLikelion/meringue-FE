@@ -8,7 +8,7 @@ import StickerSelection from '../../components/StickerSelection/StickerSelection
 import { EmojiDetailData, PostData } from '../../interface/emojiInterface.ts';
 import PostView from '../../components/PostView/PostView.tsx';
 import { STICKER_SIZE } from '../../const/CONST.ts';
-import Menu from '../../components/Menu.tsx';
+import Menu from '../../components/Menu/Menu.tsx';
 import { getCategoryData } from '../../functions/getCategory.ts';
 
 export default function StickerView({ postId }: { postId: number }) {
