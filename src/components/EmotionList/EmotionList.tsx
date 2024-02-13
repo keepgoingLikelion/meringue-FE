@@ -2,7 +2,7 @@
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Link } from 'react-router-dom';
 import s from './EmotionList.module.css';
-import GetEmotionIcon from './GetEmotionIcon';
+import GetEmotionIcon from '../../utils/GetEmotionIcon';
 import useLikedPosts from '../LikedPostsList/useLikedPosts';
 
 const queryClient = new QueryClient();

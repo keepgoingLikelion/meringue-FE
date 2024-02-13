@@ -1,25 +1,24 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable import/no-extraneous-dependencies */
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { AxiosResponse } from 'axios';
 import { useParams } from 'react-router-dom';
 import { LuLoader } from 'react-icons/lu';
 import s from './PostDetail.module.css';
 import getThemeColor from '../../utils/getThemeColor';
 import theme from '../../styles/ThemeColor.module.css';
+import instance, { APIResponse } from '../../interface/instance';
 
-interface Post {
+interface PostDTO {
   postId: number;
-  createdDate: Date;
+  createdDate: string;
   username: string;
   emotionType: number;
   content: string;
-  comments: Comment[];
+  emojis: EmojiDTO[];
 }
-
-interface Comment {
-  commentId: number;
-  userId: number;
+interface EmojiDTO {
+  emojiId: number;
   emojiImgUrl: string;
   pointX: number;
   pointY: number;
@@ -27,14 +26,15 @@ interface Comment {
 
 function PostDetail() {
   const { postId } = useParams();
-  const [post, setPost] = useState<Post | null>(null);
+  const [post, setPost] = useState<PostDTO | null>(null);
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const res = await axios.get<Post[]>(`http://localhost:3000/post?postId=${postId}`); // 임의 api
-        setPost(res.data[0]);
+        const api = `post/${postId}`;
+        const res: AxiosResponse<APIResponse<PostDTO>> = await instance.get(api);
+        setPost(res.data.data);
       } catch (error) {
-        console.error('Error fetching post:', error);
+        console.error('Error fetching myPostDetail:', error);
       }
     };
 

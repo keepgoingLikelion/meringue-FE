@@ -1,33 +1,18 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable import/no-extraneous-dependencies */
-import axios from 'axios';
+import { AxiosResponse } from 'axios';
 import {
-  subMonths, addMonths, getDaysInMonth, format,
+  subMonths, addMonths, getDaysInMonth,
 } from 'date-fns';
 import create from 'zustand';
-
-interface PostDTO {
-  postId: number;
-  createdDate: Date;
-  username: string;
-  emotionType: number;
-  content: string;
-  comments: CommentDTO[];
-}
-
-interface CommentDTO {
-  commentId: number;
-  userId: number;
-  emojiImgUrl: String;
-  pointX: number;
-  pointY: number;
-}
+import instance, { APIResponse } from '../interface/instance';
+import { PostSimpleDTO } from '../interface/PostInterface';
 
 type CalendarStore = {
   currentDate: Date;
   weekCalendarList: number[][];
-  posts: PostDTO[];
+  posts: PostSimpleDTO;
   setCurrentDate: (date: Date) => void;
   updateMonth: (action: 'prev' | 'next') => void;
 };
@@ -35,14 +20,21 @@ type CalendarStore = {
 export const useCalendarStore = create<CalendarStore>((set) => {
   const today = new Date();
 
-  const fetchPostsForMonth = async (date: Date): Promise<PostDTO[]> => {
+  const fetchPostsForMonth = async (date: Date): Promise<PostSimpleDTO> => {
     try {
-      const api = `http://localhost:3000/post?year=${date.getFullYear()}&month=${date.getMonth() + 1}`;
-      const response = await axios.get(api);
-      return response.data;
+      const api = `post?year=${date.getFullYear()}&month=${date.getMonth() + 1}`;
+      const res: AxiosResponse<APIResponse<PostSimpleDTO>> = await instance.get(api);
+      return res.data.data;
     } catch (error) {
       console.error('Error fetching posts:', error);
-      return [];
+      return {
+        postId: -1,
+        createdDate: new Date(),
+        userId: -1,
+        username: '',
+        emotionType: -1,
+        content: '',
+      };
     }
   };
 
@@ -81,7 +73,14 @@ export const useCalendarStore = create<CalendarStore>((set) => {
   return {
     currentDate: today,
     weekCalendarList: [],
-    posts: [],
+    posts: {
+      postId: -1,
+      createdDate: new Date(),
+      userId: -1,
+      username: '',
+      emotionType: -1,
+      content: '',
+    },
     setCurrentDate: (date) => initializeCalendar(date),
     updateMonth: (action) => {
       set((state) => {

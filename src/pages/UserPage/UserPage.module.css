@@ -9,7 +9,6 @@
     @media (min-width: 1000px) {
         gap: 70%;
     }
-    
 }
 .profileContent{
     float: left;
@@ -22,13 +21,27 @@
     align-items: center;
     height: 40px;
 }
-.setNameButton{
+.setButton{
     background-color: #ffffff79;
     border: none;
     border-radius: 20px;
     width: 35px;
     color: var(--point-brown-color);
     margin-left: 5px;
+}
+.inputBox{
+    border-bottom: 1px rgba(255, 255, 255, 0.705) solid;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    background: transparent;
+    padding: 2px;
+    font-family: 'Pretendard';
+    color: var(--point-brown-color);
+    font-size: 20px;
+}
+.inputBox:focus{
+    outline: none;
 }
 h2.userName{
     font-family: 'KyoboHand';
@@ -40,9 +53,6 @@ h2.userName{
 h4.userMood{
     font-size: 16px;
     font-weight: 400;
-}
-img.userIcon{
-    margin-bottom: 20px;
 }
 .calContainer{
     display: flex;

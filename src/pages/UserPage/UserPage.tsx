@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { LuLoader } from 'react-icons/lu';
 import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
 import MenuBar from '../../components/Menu/Menu';
 import styles from '../../styles/Layout.module.css';
-import profileIcon from '../../assets/basic-logo-lined.svg';
 import Calendar from '../../components/Calendar/Container';
 import { useTodayPostStore } from '../../actions/todayPost';
 import { useCalendarStore } from '../../actions/calendarStore';
@@ -11,7 +11,7 @@ import EmotionList from '../../components/EmotionList/EmotionList';
 import s from './UserPage.module.css';
 import theme from '../../styles/ThemeColor.module.css';
 import getThemeColor from '../../utils/getThemeColor';
-import { fetchUserNickname, updateNickname } from '../../utils/nickname';
+import { fetchUserNickname, updateNickname } from '../../utils/handleNickname';
 
 function Mypage() {
   const { currentDate } = useCalendarStore();
@@ -28,7 +28,11 @@ function Mypage() {
   }, [currentDate, fetchTodayPost]);
 
   if (!todayPost) {
-    return <div>오늘 작성한 쿠키가 없어요 </div>;
+    return (
+      <div className={styles.wrapper}>
+        <LuLoader style={{ color: 'lightgrey', width: '30px', height: '30px' }} />
+      </div>
+    );
   }
 
   const changeTodayMood = (emotionType: number): string => {
@@ -50,6 +54,25 @@ function Mypage() {
     updateNickname(newName);
   };
 
+  const getEmotionIcon = (emotion: number): string => {
+    switch (emotion) {
+      case 1:
+        return 'happy';
+      case 2:
+        return 'sad';
+      case 3:
+        return 'angry';
+      case 4:
+        return 'upset';
+      case 5:
+        return 'simsim';
+      case 6:
+        return 'tired';
+      default:
+        return '';
+    }
+  };
+
   return (
     <div className={`${styles.wrapper} ${theme[getThemeColor(todayPost.emotionType)]}`}>
       <div className={styles.header}>
@@ -65,10 +88,12 @@ function Mypage() {
                     type="text"
                     value={newName}
                     onChange={handleNameChange}
+                    className={s.inputBox}
                   />
                   <button
                     type="button"
                     onClick={handleSaveName}
+                    className={s.setButton}
                   >
                     save
                   </button>
@@ -78,7 +103,7 @@ function Mypage() {
                   <h2 className={s.userName}>{userName}</h2>
                   <button
                     type="button"
-                    className={s.setNameButton}
+                    className={s.setButton}
                     onClick={handleNameEdit}
                   >
                     edit
@@ -95,11 +120,13 @@ function Mypage() {
               </span>
             </h4>
           </div>
-          <img
-            src={profileIcon}
-            alt="userIcon"
-            className={s.userIcon}
-          />
+          <div className={s.userIcon}>
+            <img
+              src={`/src/assets/moodIcons/${getEmotionIcon(todayPost.emotionType)}.svg`}
+              alt={`${getEmotionIcon(todayPost.emotionType)}`}
+              style={{ width: '75px', height: '75px', marginBottom: '13px' }}
+            />
+          </div>
         </div>
         <div className={styles.contentWrapper}>
           <div className={s.calContainer}>

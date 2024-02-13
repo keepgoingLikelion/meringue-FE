@@ -1,26 +1,26 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { useQuery } from 'react-query';
-import axios from 'axios';
+import { AxiosResponse } from 'axios';
 import useLikedPostsStore from '../../actions/likedPostsStore';
-
-interface PostSimpleDTO {
-  postId: number;
-  createdDate: Date;
-  userId: number;
-  username: string;
-  emotionType: number;
-  content: string;
-}
+import instance, { APIResponse } from '../../interface/instance';
+import { PostSimpleDTO } from '../../interface/PostInterface';
 
 const fetchLikedPosts = async (emotionType: number) => {
-  const response = await axios.get('http://localhost:3000/myLikedPostList/', { params: { emotionType } });
-  return response.data as PostSimpleDTO[];
+  try {
+    const res: AxiosResponse<APIResponse<PostSimpleDTO[]>> = await instance.get('myLikedPostList', {
+      params: { emotionType },
+    });
+    return res.data.data as PostSimpleDTO[];
+  } catch (error) {
+    console.log('Error fetching LikedPosts: ', error);
+    throw error;
+  }
 };
 
 const useLikedPosts = (emotionType: number) => {
   const setLikedPosts = useLikedPostsStore((state) => state.setLikedPosts);
 
-  const { data: likedPosts } = useQuery(['likedPosts', emotionType], () => fetchLikedPosts(emotionType), {
+  const { data: likedPosts } = useQuery<PostSimpleDTO[]>(['likedPosts', emotionType], () => fetchLikedPosts(emotionType), {
     onSuccess: (data) => {
       setLikedPosts(data);
     },

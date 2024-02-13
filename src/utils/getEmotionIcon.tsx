@@ -1,4 +1,4 @@
-import s from './EmotionList.module.css';
+import s from '../components/EmotionList/EmotionList.module.css';
 
 interface EmotionIconProps {
   type: number;

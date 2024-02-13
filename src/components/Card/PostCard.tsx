@@ -1,5 +1,5 @@
 import { format } from 'date-fns';
-import GetEmotionIcon from '../EmotionList/GetEmotionIcon';
+import GetEmotionIcon from '../../utils/GetEmotionIcon';
 import s from './PostCard.module.css';
 import cream from '../../assets/creamLayer.svg';
 

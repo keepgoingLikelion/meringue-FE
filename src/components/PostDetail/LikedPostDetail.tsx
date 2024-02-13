@@ -1,37 +1,23 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable import/no-extraneous-dependencies */
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { AxiosResponse } from 'axios';
 import { useParams } from 'react-router-dom';
 import { format } from 'date-fns';
-
-interface Post {
-  postId: number;
-  createdDate: Date;
-  username: string;
-  emotionType: number;
-  content: string;
-  comments: Comment[];
-}
-
-interface Comment {
-  commentId: number;
-  userId: number;
-  emojiImgUrl: string;
-  pointX: number;
-  pointY: number;
-}
+import instance, { APIResponse } from '../../interface/instance';
+import { PostData } from '../../interface/emojiInterface';
 
 function LikedPostDetail() {
   const { postId } = useParams();
-  const [post, setPost] = useState<Post | null>(null);
+  const [post, setPost] = useState<PostData | null>(null);
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const res = await axios.get<Post[]>(`http://localhost:3000/myLikedPostList?postId=${postId}`); // 임의 api
-        setPost(res.data[0]);
+        const api = `post?postId=${postId}`;
+        const res: AxiosResponse<APIResponse<PostData>> = await instance.get(api);
+        setPost(res.data.data);
       } catch (error) {
-        console.error('Error fetching post:', error);
+        console.error('Error fetching LikedPostDetail:', error);
       }
     };
 
@@ -47,14 +33,6 @@ function LikedPostDetail() {
       <p>{post.postId}</p>
       <p>{format(post.createdDate, 'yyyy-MM-dd')}</p>
       <p>{post.content}</p>
-      <p>
-        {post.comments.map((comment, idx) => (
-          <div key={idx}>
-            <h4>comment ID:</h4>
-            <p>{comment.commentId}</p>
-          </div>
-        ))}
-      </p>
     </div>
   );
 }

@@ -1,10 +1,23 @@
-{"googleUserInfo": {
-  "username": "googleUserName",
-  "accessToken": "dummy_access_token"
+{
+  "user": {
+  "nickname": "닉네임123"
 },
   "post": [
     {
       "postId": 1,
+      "createdDate": "2024-02-05",
+      "username": "user1",
+      "emotionType": 1,
+      "content": "내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. 내용입니다. ",
+      "comments": [
+        {
+          "commentId": 1,
+          "userId": 101
+        }
+      ]
+    },
+    {
+      "postId": 101,
       "createdDate": "2024-02-05",
       "username": "user1",
       "emotionType": 1,
@@ -206,11 +219,11 @@
   ],
   "myPost": [
     {
-      "postId": 208,
-      "createdDate": "2024-02-08",
+      "postId": 213,
+      "createdDate": "2024-02-13",
       "username": "username",
-      "emotionType": 2,
-      "content": "2024년 2월 8일에 작성한 포스트입니다. 최대 4줄까지 보여집니다. 2024년 2월 8일에 작성한 포스트입니다. 최대 4줄까지 보여집니다. 2024년 2월 8일에 작성한 포스트입니다. 최대 4줄까지 보여집니다. 2024년 2월 8일에 작성한 포스트입니다. 최대 4줄까지 보여집니다. ",
+      "emotionType": 3,
+      "content": "2024년 2월 13일에 작성한 포스트입니다. 최대 4줄까지 보여집니다. 2024년 2월 13일에 작성한 포스트입니다. 최대 4줄까지 보여집니다. 2024년 2월 13일에 작성한 포스트입니다. 최대 4줄까지 보여집니다. 2024년 2월 13일에 작성한 포스트입니다. 최대 4줄까지 보여집니다. ",
       "comments": [
         {
           "commentId": 2,
