@@ -14,7 +14,7 @@ export const useTodayPostStore = create<TodayPostStore>((set) => ({
   todayPost: null,
   fetchTodayPost: async () => {
     try {
-      const res: AxiosResponse<APIResponse<PostData>> = await instance.get('myPost');
+      const res: AxiosResponse<APIResponse<PostData>> = await instance.get('/post/myPost');
       set({ todayPost: res.data.data });
     } catch (error) {
       console.error('Error fetching today post:', error);

@@ -3,9 +3,9 @@
 import { useEffect, useState } from 'react';
 import { AxiosResponse } from 'axios';
 import { useParams } from 'react-router-dom';
-import { format } from 'date-fns';
 import instance, { APIResponse } from '../../interface/instance';
 import { PostData } from '../../interface/emojiInterface';
+import PostView from '../PostView/PostView';
 
 function LikedPostDetail() {
   const { postId } = useParams();
@@ -13,7 +13,7 @@ function LikedPostDetail() {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const api = `post?postId=${postId}`;
+        const api = `post/${postId}`;
         const res: AxiosResponse<APIResponse<PostData>> = await instance.get(api);
         setPost(res.data.data);
       } catch (error) {
@@ -29,11 +29,7 @@ function LikedPostDetail() {
   }
 
   return (
-    <div>
-      <p>{post.postId}</p>
-      <p>{format(post.createdDate, 'yyyy-MM-dd')}</p>
-      <p>{post.content}</p>
-    </div>
+    <PostView stickers={post.emoji} content={post.content} type={post.emotionType} />
   );
 }
 

@@ -16,7 +16,7 @@ interface CustomInstance extends AxiosInstance {
   ): Promise<R>;
 }
 const instance: CustomInstance = axios.create({
-  baseURL: 'http://localhost:3000/',
+  baseURL: 'http://localhost:3000/api/',
   withCredentials: true,
   headers: {},
 });

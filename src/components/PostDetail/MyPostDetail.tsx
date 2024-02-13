@@ -5,33 +5,18 @@ import { AxiosResponse } from 'axios';
 import { useParams } from 'react-router-dom';
 import { LuLoader } from 'react-icons/lu';
 import s from './PostDetail.module.css';
-import getThemeColor from '../../utils/GetThemeColor.tsx';
-import theme from '../../styles/ThemeColor.module.css';
+import PostView from '../PostView/PostView.tsx';
 import instance, { APIResponse } from '../../interface/instance';
-
-interface PostDTO {
-  postId: number;
-  createdDate: string;
-  username: string;
-  emotionType: number;
-  content: string;
-  emojis: EmojiDTO[];
-}
-interface EmojiDTO {
-  emojiId: number;
-  emojiImgUrl: string;
-  pointX: number;
-  pointY: number;
-}
+import { PostData } from '../../interface/emojiInterface';
 
 function PostDetail() {
   const { postId } = useParams();
-  const [post, setPost] = useState<PostDTO | null>(null);
+  const [post, setPost] = useState<PostData | null>(null);
   useEffect(() => {
     const fetchPost = async () => {
       try {
         const api = `post/${postId}`;
-        const res: AxiosResponse<APIResponse<PostDTO>> = await instance.get(api);
+        const res: AxiosResponse<APIResponse<PostData>> = await instance.get(api);
         setPost(res.data.data);
       } catch (error) {
         console.error('Error fetching myPostDetail:', error);
@@ -51,11 +36,7 @@ function PostDetail() {
   }
 
   return (
-    <div className={`${s.wrapper} ${theme[getThemeColor(post.emotionType)]}`}>
-      <div className={s.card}>
-        <h4>{post.content}</h4>
-      </div>
-    </div>
+    <PostView stickers={post.emoji} content={post.content} type={post.emotionType} />
   );
 }
 

@@ -22,7 +22,7 @@ export const useCalendarStore = create<CalendarStore>((set) => {
 
   const fetchPostsForMonth = async (date: Date): Promise<PostSimpleDTO> => {
     try {
-      const api = `post?year=${date.getFullYear()}&month=${date.getMonth() + 1}`;
+      const api = `/post/mypage/post?year=${date.getFullYear()}&month=${date.getMonth() + 1}`;
       const res: AxiosResponse<APIResponse<PostSimpleDTO>> = await instance.get(api);
       return res.data.data;
     } catch (error) {
