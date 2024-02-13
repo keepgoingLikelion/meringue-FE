@@ -1,11 +1,12 @@
+import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import styles from './MainPage.module.css';
 import UserTextCard from '../../components/UserTextCard/UserTextCard.tsx';
 import { PostSimpleDTO } from '../../interface/postInterface.ts';
 import filterButton from '../../assets/filter-button.svg';
-import React, {useState} from "react";
-import {getCategoryDataList} from "../../functions/getCategory.ts";
+import { getCategoryData, getCategoryDataList } from '../../functions/getCategory.ts';
 import QuitButton from '../../assets/quit-button.svg';
+import Menu from '../../components/Menu.tsx';
 
 function MyText({ content }: { content: string }) {
   return (
@@ -87,7 +88,7 @@ function FilterList({ ignoreList, setIgnoreList, setIsFilter }:
   );
 }
 
-export default function MainPage() {
+export default function MainPage({ content, type }: { content: string; type: number }) {
   const [isFilter, setIsFilter] = useState<boolean>(false);
   const [ignoreList, setIgnoreList] = useState<number[]>([]);
   const onClickFilter = () => {
@@ -96,10 +97,13 @@ export default function MainPage() {
 
   return (
     <div className={styles.wrap}>
-      <div className={styles.title}>
-        <MyText content="테테스트스슽테테테스스트트세트세트세트트테스트스슽테테테스스트트세트세트세트트스트스슽테테테스스트트세트세트세트트" />
+      <div style={{ width: '100%', backgroundColor: getCategoryData(type)?.color ?? '#000000' }}>
+        <Menu />
       </div>
-      <div className={styles.wave} />
+      <div className={styles.title} style={{ backgroundColor: getCategoryData(type)?.color ?? '#000000' }}>
+        <MyText content={content} />
+      </div>
+      <div className={styles.wave} style={{ backgroundColor: getCategoryData(type)?.color ?? '#000000' }} />
       <div className={styles.bodyWrap}>
         <div className={styles.body}>
           <div className={styles.filter} onClick={onClickFilter} role="presentation">
@@ -112,7 +116,7 @@ export default function MainPage() {
                 setIsFilter={setIsFilter}
                 setIgnoreList={setIgnoreList}
               />
-            ) }
+            )}
           <UserPostList ignoreList={ignoreList} />
         </div>
       </div>

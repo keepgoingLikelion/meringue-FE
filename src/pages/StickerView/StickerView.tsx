@@ -8,6 +8,8 @@ import StickerSelection from '../../components/StickerSelection/StickerSelection
 import { EmojiDetailData, PostData } from '../../interface/emojiInterface.ts';
 import PostView from '../../components/PostView/PostView.tsx';
 import { STICKER_SIZE } from '../../const/CONST.ts';
+import Menu from '../../components/Menu.tsx';
+import { getCategoryData } from '../../functions/getCategory.ts';
 
 export default function StickerView({ postId }: { postId: number }) {
   const [stickers, setStickers] = useState<EmojiDetailData[]>([]);
@@ -60,6 +62,9 @@ export default function StickerView({ postId }: { postId: number }) {
   return (
     <>
       <div ref={cardTextRef} className={styles.clickDiv} role="presentation" onClick={onClickDiv}>
+        <div style={{ width: '100%', backgroundColor: getCategoryData(postData?.emotionType ?? -1)?.color ?? '#000000' }}>
+          <Menu />
+        </div>
         <PostView type={postData?.emotionType ?? 1} stickers={stickers} content={postData?.content ?? 'Loading...'} />
       </div>
       {toggleStickerButton ? (
