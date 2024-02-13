@@ -1,19 +1,23 @@
 export interface EmojiCategory {
-  emojiType: number;
-  emojiTypeUrl: string;
+  emojiTypeUrls: string[];
+  emojiUrls: string[][];
 }
 
 export interface EmojiData {
-  emojiId: number;
-  emojiImgUrl: string;
+  id: number;
+  emojiUrl: string;
 }
 
 export interface EmojiDetailData extends EmojiData {
-  top: number;
-  left: number;
+  x: number;
+  y: number;
 }
 export interface PostData {
-  id: number;
+  postId: number;
+  userId: number;
+  createdDate: string;
+  username: string;
+  emotionType: number;
   content: string;
-  stickerData: EmojiDetailData[]
+  emojis: EmojiDetailData[];
 }
