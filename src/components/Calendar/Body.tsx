@@ -14,7 +14,7 @@ import upset from '../../assets/moodIcons/upset.svg';
 function CalBody() {
   const navigate = useNavigate();
   const {
-    currentDate, weekCalendarList, posts,
+    currentDate, weekCalendarList, postings,
   } = useCalendarStore();
 
   const handleDateClick = (clickedDate: Date, postId?: number) => {
@@ -55,7 +55,7 @@ function CalBody() {
             );
 
             const formattedDate = format(clickedDate, 'yyyy-MM-dd');
-            const post = posts.find((p) => format(p.createdDate, 'yyyy-MM-dd') === formattedDate);
+            const post = postings.find((p) => format(p.createdDate, 'yyyy-MM-dd') === formattedDate);
 
             return (
               <button

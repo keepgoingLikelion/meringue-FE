@@ -7,7 +7,7 @@ import { PostSimpleDTO } from '../../interface/postInterface.ts';
 
 const fetchLikedPosts = async (emotionType: number) => {
   try {
-    const res: AxiosResponse<APIResponse<PostSimpleDTO[]>> = await instance.get('/post/myLikedPostList', {
+    const res: AxiosResponse<APIResponse<PostSimpleDTO[]>> = await instance.get('/post/myLikePostList', {
       params: { emotionType },
     });
     return res.data.data as PostSimpleDTO[];

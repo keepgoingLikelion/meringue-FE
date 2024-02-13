@@ -16,8 +16,8 @@ function PostDetail() {
     const fetchPost = async () => {
       try {
         const api = `post/${postId}`;
-        const res: AxiosResponse<APIResponse<PostData>> = await instance.get(api);
-        setPost(res.data.data);
+        const res: {data: PostData} = await instance.get(api);
+        setPost(res.data);
       } catch (error) {
         console.error('Error fetching myPostDetail:', error);
       }
