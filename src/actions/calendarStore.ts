@@ -1,29 +1,18 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable import/no-extraneous-dependencies */
-// import axios from 'axios';
+import { AxiosResponse } from 'axios';
 import {
   subMonths, addMonths, getDaysInMonth,
 } from 'date-fns';
 import create from 'zustand';
-
-// const fetchPostDates = async (month: Date) => {
-//   const res = await axios.get(`/api/posts?month=${format(month, 'yyyy-MM')}`);
-//   return res.data;
-// };
-// const fetchPostCategories = async (date: Date) => {
-//   // const res = await axios.get(`/api/posts/categories?date=${format(date, 'yyyy-MM-dd')}`);
-//   // return res.data;
-//   return ['Category1', 'Category2'];
-// };
-const fetchPostDates = async () => ['2024-01-01', '2024-01-25', '2024-02-15'];
-const fetchPostCategories = async (date: Date) => ['Category1'];
+import instance, { APIResponse } from '../interface/instance';
+import { PostSimpleDTO } from '../interface/postInterface.ts';
 
 type CalendarStore = {
   currentDate: Date;
   weekCalendarList: number[][];
-  posting: string[];
-  postCategories: string[];
+  posts: PostSimpleDTO;
   setCurrentDate: (date: Date) => void;
   updateMonth: (action: 'prev' | 'next') => void;
 };
@@ -31,15 +20,31 @@ type CalendarStore = {
 export const useCalendarStore = create<CalendarStore>((set) => {
   const today = new Date();
 
-  // const { data: postDates } = useQuery(['postDates', today], () => fetchPostDates(today));
+  const fetchPostsForMonth = async (date: Date): Promise<PostSimpleDTO> => {
+    try {
+      const api = `post?year=${date.getFullYear()}&month=${date.getMonth() + 1}`;
+      const res: AxiosResponse<APIResponse<PostSimpleDTO>> = await instance.get(api);
+      return res.data.data;
+    } catch (error) {
+      console.error('Error fetching posts:', error);
+      return {
+        postId: -1,
+        createdDate: new Date(),
+        userId: -1,
+        username: '',
+        emotionType: -1,
+        content: '',
+      };
+    }
+  };
 
   const initializeCalendar = async (date: Date) => {
-    const postDates = await fetchPostDates();
-    const postCategories = await fetchPostCategories(date);
+    const posts = await fetchPostsForMonth(date);
     const totalMonthDays = getDaysInMonth(date);
     const firstDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
     const lastDayOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0);
 
+    // 수정
     const prevDayList = Array(firstDayOfMonth.getDay()).fill(0);
     const currentDayList = Array.from({ length: totalMonthDays }).map((_, i) => i + 1);
     const nextDayList = Array(6 - lastDayOfMonth.getDay()).fill(0);
@@ -59,8 +64,7 @@ export const useCalendarStore = create<CalendarStore>((set) => {
     set({
       currentDate: date,
       weekCalendarList,
-      posting: postDates || [],
-      postCategories: postCategories || [],
+      posts,
     });
   };
 
@@ -69,8 +73,14 @@ export const useCalendarStore = create<CalendarStore>((set) => {
   return {
     currentDate: today,
     weekCalendarList: [],
-    posting: [],
-    postCategories: [],
+    posts: {
+      postId: -1,
+      createdDate: new Date(),
+      userId: -1,
+      username: '',
+      emotionType: -1,
+      content: '',
+    },
     setCurrentDate: (date) => initializeCalendar(date),
     updateMonth: (action) => {
       set((state) => {

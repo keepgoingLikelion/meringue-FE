@@ -1,6 +1,3 @@
- *{
-    font-family: 'KyoboHand';
- }
  .calWrapper{
    display: flex;
    flex-direction: column;
@@ -25,6 +22,7 @@
  .dateText h4{
     font-size: 16px;
     color: var(--point-brown-color);
+    font-family: 'KyoboHand';
  }
 
  .wrapper .bodyWrapper{
@@ -48,7 +46,11 @@
    background-color: transparent;
  }
 
- .moodIcon{
+ .emotionIcons{
   height: 31px;
   width: 31px;
  }
+ .emotionIcons:hover {
+  opacity: 0.85; 
+  cursor: pointer;
+}
