@@ -1,0 +1,6 @@
+.AddButton {
+    z-index: 99;
+    position: fixed;
+    left: 37px;
+    bottom: 27px;
+}
