@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './StickerSelection.module.css';
 import QuitButton from '../../assets/quit-button.svg';
 import NextButton from '../../assets/next-button.svg';
-import { EmojiCategory, EmojiData } from '../../interface/emojiInterface.tsx';
+import { EmojiCategory, EmojiData } from '../../interface/emojiInterface.ts';
 
 export default function StickerSelection({ setToggleStickerButton, setIsAttachment }
 : { setToggleStickerButton: React.Dispatch<React.SetStateAction<boolean>>,

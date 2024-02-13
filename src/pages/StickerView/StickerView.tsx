@@ -6,7 +6,7 @@ import styles from './StickerView.module.css';
 import TextCard from '../../components/TextCard/TextCard.tsx';
 import AddStickerButton from '../../components/AddStickerButton/AddStickerButton.tsx';
 import StickerSelection from '../../components/StickerSelection/StickerSelection.tsx';
-import { EmojiData, EmojiDetailData, PostData } from '../../interface/emojiInterface.tsx';
+import { EmojiData, EmojiDetailData, PostData } from '../../interface/emojiInterface.ts';
 
 const stickerSize = 65;
 
@@ -66,6 +66,7 @@ export default function StickerView({ postId }: { postId: number }) {
         })}
       </div>
       <TextCard
+        className={styles.CardTextWrapper}
         text={postData?.content ?? 'Loading...'}
       />
       {toggleStickerButton ? (
