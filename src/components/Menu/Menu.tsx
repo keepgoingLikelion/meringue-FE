@@ -1,7 +1,7 @@
-/* eslint-disable import/no-extraneous-dependencies */
+import { Link } from 'react-router-dom';
 import { PiUserThin } from 'react-icons/pi';
-import s from '../styles/Menu.module.css';
-import logo from '../assets/basic-logo-lined.svg';
+import s from './Menu.module.css';
+import logo from '../../assets/basic-logo-lined.svg';
 
 function MenuBar() {
   return (
@@ -14,10 +14,9 @@ function MenuBar() {
         />
       </div>
       <div className={s.buttons}>
-        <PiUserThin
-          type="button"
-          className={s.button}
-        />
+        <Link to="/mypage" className={s.buttons}>
+          <PiUserThin className={s.button} />
+        </Link>
       </div>
     </div>
   );

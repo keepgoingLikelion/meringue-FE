@@ -2,7 +2,7 @@
 import { format } from 'date-fns';
 import { AiFillCaretLeft, AiFillCaretRight } from 'react-icons/ai';
 import { useCalendarStore } from '../../actions/calendarStore';
-import s from '../../styles/Calendar.module.css';
+import s from './Calendar.module.css';
 
 function CalHeader() {
   const { currentDate, updateMonth } = useCalendarStore();
