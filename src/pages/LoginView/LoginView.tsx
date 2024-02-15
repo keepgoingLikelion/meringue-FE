@@ -1,11 +1,23 @@
+import axios from 'axios';
 import style from './LoginView.module.css';
 import basicLogoLined from '../../assets/basic-logo-lined.svg';
 import questionMark from '../../assets/question-mark.svg';
 import loginButton from '../../assets/login-button.svg';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useTodayPostStore } from '../../actions/todayPost';
 
 const googleURL = 'http://localhost:8080/login';
 
 export default function LoginView() {
+  const navigation = useNavigate();
+  const { todayPost } = useTodayPostStore();
+  useEffect(() => {
+    if (axios.defaults.headers.common.Authorization && todayPost)  {
+      navigation('/main')
+    }
+      // window.location.href = "http://localhost:8080/login";
+  }, [todayPost]);
   return (
     <div className={style.wrapp}>
       <div className={style.logoContainer}>

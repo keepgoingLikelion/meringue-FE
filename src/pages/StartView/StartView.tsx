@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import style from './StartView.module.css'
 
@@ -6,6 +8,14 @@ interface EmotionIconProps {
 }
 
 export default function LoginView ({type}:EmotionIconProps): JSX.Element {
+  const navigation = useNavigate();
+
+  useEffect(() => {
+      setTimeout(function () {
+          navigation("/main");
+      }, 3000);
+  }, []);
+
   const userIcon = (emotionType:number): string =>{
     switch (emotionType){
       case 1: return 'happy';

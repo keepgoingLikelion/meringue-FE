@@ -1,5 +1,6 @@
 import { useQuery } from 'react-query';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import styles from './StickerSelection.module.css';
 import QuitButton from '../../assets/quit-button.svg';
 import NextButton from '../../assets/next-button.svg';
@@ -12,10 +13,14 @@ export default function StickerSelection({ setToggleStickerButton, setIsAttachme
   const { isLoading, data } = useQuery<EmojiCategory>(
     {
       queryKey: ['stickerData'],
-      queryFn: () => fetch('http://localhost:3000/api/category').then((res) => res.json()),
+      queryFn: () => axios.get('/api/emoji').then((res) => res.data),
       onSuccess: () => { setCurrentCategory(0); },
     },
   );
+
+  useEffect(() => {
+      console.log(data);
+  }, [data])
 
   const onClickQuitButton = () => {
     setToggleStickerButton(false);
@@ -43,7 +48,7 @@ export default function StickerSelection({ setToggleStickerButton, setIsAttachme
       </div>
       <div className={styles.Items}>
         <div className={styles.ItemFlex}>
-          {data?.emojiUrls[currentCategory].map((v) => <img role="presentation" className={styles.Item} onClick={onClickStickerImg} width="48px" height="48px" src={v} alt={`${v}`} key={v} />)}
+          {data?.emojiUrls[currentCategory].map((v) => <img role="presentation" className={styles.Item} onClick={onClickStickerImg} width="48px" height="48px" src={v} alt={`${v}`} />)}
         </div>
       </div>
     </div>

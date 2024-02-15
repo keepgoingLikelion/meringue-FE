@@ -11,17 +11,22 @@ import { STICKER_SIZE } from '../../const/CONST.ts';
 import Menu from '../../components/Menu/Menu.tsx';
 import { getCategoryData } from '../../functions/getCategory.ts';
 import BackButton from '../../assets/back-button.svg';
+import { useNavigate } from 'react-router-dom';
 
 export default function StickerView({ postId }: { postId: number }) {
   const [stickers, setStickers] = useState<EmojiDetailData[]>([]);
   const [toggleStickerButton, setToggleStickerButton] = useState<boolean>(false);
   const [attachment, setAttachment] = useState<string | null>(null);
   const cardTextRef = useRef<HTMLDivElement>(null);
+  const navigation = useNavigate();
 
+  const onClickBack = () => {
+    navigation("/main");
+  }
   const { isLoading: isStickersLoading, data: postData } = useQuery<PostData>(
     {
-      queryKey: ['backgroundStickers'],
-      queryFn: () => fetch(`http://localhost:3000/api/post/${postId}`).then((res) => res.json()),
+      queryKey: ['backgroundStickerssss'],
+      queryFn: () => axios.get(`/api/post/${postId}`).then((res) => res.data),
       onSuccess: (v) => { setStickers(v.emojis); },
     },
   );
@@ -52,7 +57,7 @@ export default function StickerView({ postId }: { postId: number }) {
     };
 
     setAttachment(null);
-    axios.post<EmojiDetailData>('http://localhost:3000/api/category/emojiSave', currentSticker).then((v) => {
+    axios.post<EmojiDetailData>('/api/emojiSave', currentSticker).then((v) => {
       setStickers((state) => [
         ...state,
         v.data,
@@ -67,7 +72,7 @@ export default function StickerView({ postId }: { postId: number }) {
         <div style={{ width: '100%', backgroundColor: emojiColor }}>
           <Menu />
         </div>
-        <img className={styles.backButton} src={BackButton} alt="back-button" style={{ backgroundColor: emojiColor }} />
+        <img className={styles.backButton} src={BackButton} alt="back-button" style={{ backgroundColor: emojiColor }} onClick={onClickBack}/>
         <PostView type={postData?.emotionType ?? 1} stickers={stickers} content={postData?.content ?? 'Loading...'} />
       </div>
       {toggleStickerButton ? (
