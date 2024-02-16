@@ -8,10 +8,16 @@ import filterButton from '../../assets/filter-button.svg';
 import { getCategoryData, getCategoryDataList } from '../../functions/getCategory.ts';
 import QuitButton from '../../assets/quit-button.svg';
 import Menu from '../../components/Menu/Menu.tsx';
+import { useNavigate } from 'react-router-dom';
 
 function MyText({ content }: { content: string }) {
+  const navigation = useNavigate();
+  
+  const onClickCard = () => {
+    navigation("/mypost");
+  }
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} onClick={onClickCard}>
       <p className={styles.CardText}>{content}</p>
     </div>
   );
@@ -23,6 +29,7 @@ function UserPostList({ ignoreList }: { ignoreList: number[] }) {
       queryFn: () => axios.get<{posts: PostSDTO[]}>('/api/post/postList?category=1,2,3,4,5,6').then((v) => v.data.posts),
     },
   );
+  console.log(data);
 
 
   return (

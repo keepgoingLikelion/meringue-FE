@@ -9,9 +9,10 @@ import emo6 from '../../assets/emo6.svg'
 
 import { useEffect, useState } from 'react';
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
+import { useTodayPostStore } from '../../actions/todayPost'
 
 const getDataToString =(date:Date) : string => {
-    console.log(date)
     const currentDate :Date = new Date(date.toString());
     const m :number = currentDate.getMonth() + 1;
     const d :number = currentDate.getDate();
@@ -32,10 +33,12 @@ const getDataToString =(date:Date) : string => {
   }
 
 
-export default function TodayPostView(){
+export default function TodayPostView({ setType }: { setType: React.Dispatch<React.SetStateAction<number>> }){
+    const navigate = useNavigate();
     const[userData, setUserData] = useState<userInfo | null>(null);
     const[post, setpost] = useState<string >('');
     const[emoType, setEmoType] = useState<number>(0);
+    const { fetchTodayPost } = useTodayPostStore();
 
     useEffect(()=>{
         axios.get<userInfo>('/api/user/me').then((v)=> {setUserData(v.data)})
@@ -48,7 +51,9 @@ export default function TodayPostView(){
             content: post,
             emotionType: emoType
         }
-        axios.post<postInfo>('/api/post',req)
+        axios.post<postInfo>('/api/post',req).then(() => fetchTodayPost());
+        setType(emoType);
+        navigate('/start');
     };
 
 
