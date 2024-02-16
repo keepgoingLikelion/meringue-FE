@@ -47,8 +47,8 @@ function App() {
         <Route path="/" element={<LoginView />} />
         <Route path="/main" element={todayPost && <div><MainPage content={todayPost.content} type={todayPost.emotionType} /></div>} />
         <Route path="/newpost" element={<TodayPostView setType={setType} />} />
-        <Route path="/start" element={<StartView type={type} />} />
-        <Route path="/post/:postId" element={todayPost && <StickerView postId={todayPost.postId} />} />
+        <Route path="/start" element={<StartView type={type}/>} />
+        <Route path="/post/:postId" element={todayPost && <StickerView  />} />
         <Route path="/mypage" element={<UserPage />} />
         <Route path="/mylog/:emotionType" element={<UserLog />} />
         <Route path="/mypost" element={<PostDetail />} />

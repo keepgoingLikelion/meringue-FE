@@ -9,14 +9,15 @@ import filterButton from '../../assets/filter-button.svg';
 import { getCategoryData, getCategoryDataList } from '../../functions/getCategory.ts';
 import QuitButton from '../../assets/quit-button.svg';
 import Menu from '../../components/Menu/Menu.tsx';
+import { useTodayPostStore } from '../../actions/todayPost.ts';
 
 function MyText({ content }: { content: string }) {
+  const { todayPost } = useTodayPostStore();
   const navigation = useNavigate();
 
   const onClickCard = () => {
-    navigation('/mypost');
-  };
-
+    navigation(`/post/${todayPost?.postId}`);
+  }
   return (
     <div className={styles.wrapper} onClick={onClickCard}> {content} </div>
   );
@@ -28,7 +29,6 @@ function UserPostList({ ignoreList }: { ignoreList: number[] }) {
       queryFn: () => axios.get<{ posts: PostSDTO[] }>('/api/post/postList?category=1,2,3,4,5,6').then((v) => v.data.posts),
     },
   );
-  console.log(data);
 
   return (
     <div className={styles.contents}>
@@ -86,11 +86,11 @@ function FilterList({ ignoreList, setIgnoreList, setIsFilter }:
           />
         ))}
       </div>
-      <div style={{ width: '100%' }}>
+      {/* <div style={{ width: '100%' }}>
         <div className={styles.apply}>
           적용
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
