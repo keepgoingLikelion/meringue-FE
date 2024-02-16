@@ -17,7 +17,7 @@ function CalBody() {
     currentDate, weekCalendarList, postings,
   } = useCalendarStore();
 
-  const handleDateClick = (clickedDate: Date, postId?: number) => {
+  const handleDateClick = (postId?: number) => {
     if (postId) {
       navigate(`/post/${postId}`);
     }
@@ -62,7 +62,7 @@ function CalBody() {
                 type="button"
                 className={`${s.days}`}
                 style={day === 0 ? { visibility: 'hidden' } : {}}
-                onClick={() => handleDateClick(clickedDate, post?.postId)}
+                onClick={() => handleDateClick(post?.postId)}
                 key={dayIndex}
               >
                 <div className="days">
