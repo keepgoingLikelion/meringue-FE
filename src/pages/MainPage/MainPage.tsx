@@ -19,7 +19,9 @@ function MyText({ content }: { content: string }) {
 
   return (
     <div className={styles.wrapper} onClick={onClickCard}>
-      <p className={styles.CardText}>{content}</p>
+      <p className={styles.CardText}>{content}
+      <button onClick={} className={styles.edit}></button>
+      </p>
     </div>
   );
 }

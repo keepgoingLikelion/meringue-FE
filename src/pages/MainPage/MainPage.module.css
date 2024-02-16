@@ -25,6 +25,21 @@
     overflow: hidden;
 }
 
+button{
+    display: none;
+}
+.wrapper:hover button{ 
+    display: block;
+}
+.edit{
+    background-image: url('/src/assets/edit.svg');
+    background-repeat: no-repeat;
+    width: 15px;
+    height: 15px;
+    background-color: #ffff;
+    border-style: none;
+}
+
 .wrap {
     width: 100%;
     height: 100%;
