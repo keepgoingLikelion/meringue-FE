@@ -11,11 +11,32 @@
     font-size: 16px;
     font-family: 'Pretendard';
 }
-
 .Wrapper {
     width: 321px;
     height: 186px;
     background-color: #FFFDF8;
     border-radius: 26px / 26px;
     padding: 36px 36px;
+}
+button{
+    display: none;
+}
+.Wrapper:hover button{ 
+    display: block;
+}
+.editBtn{
+    background-image: url('/src/assets/edit.svg');
+    background-repeat: no-repeat;
+    width: 15px;
+    height: 15px;
+    background-color: #ffff;
+    border-style: none;
+}
+.saveBtn{
+    background-image: url('/src/assets/edit-save.svg');
+    background-repeat: no-repeat;
+    width: 15px;
+    height: 15px;
+    background-color: #ffff;
+    border-style: none;
 }
