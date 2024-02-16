@@ -21,13 +21,13 @@ import StickerView from './pages/StickerView/StickerView';
 
 axios.defaults.baseURL = 'http://localhost:8080/';
 axios.defaults.withCredentials = true;
-axios.defaults.headers.common.Authorization = `Bearer ${useAccessToken}`;
+axios.defaults.headers.common.Authorization = `Bearer ${useAccessToken()}`;
 
 function App() {
   const [type, setType] = useState<number>(1);
   const { todayPost, fetchTodayPost } = useTodayPostStore();
   useEffect(() => {
-    if (!useAccessToken) {
+    if (!useAccessToken()) {
       window.location.href = `${axios.defaults.baseURL}login`;
       return;
     }
@@ -45,13 +45,13 @@ function App() {
       )}
       <Routes>
         <Route path="/" element={<LoginView />} />
-        <Route path="/main" element={todayPost && <div><MainPage postId={todayPost.postId} content={todayPost.content} type={todayPost.emotionType} /></div>} />
+        <Route path="/main" element={todayPost && <div><MainPage content={todayPost.content} type={todayPost.emotionType} /></div>} />
         <Route path="/newpost" element={<TodayPostView setType={setType} />} />
         <Route path="/start" element={<StartView type={type} />} />
-        <Route path="/mypost" element={todayPost && <StickerView postId={todayPost.postId} />} />
+        <Route path="/post/:postId" element={todayPost && <StickerView postId={todayPost.postId} />} />
         <Route path="/mypage" element={<UserPage />} />
         <Route path="/mylog/:emotionType" element={<UserLog />} />
-        <Route path="/post/:postId" element={<PostDetail />} />
+        <Route path="/mypost" element={<PostDetail />} />
         <Route path="/myLikedPost/:postId" element={<LikedPostDetail />} />
         <Route path="/post/today" element={<TodayPostDetail />} />
       </Routes>

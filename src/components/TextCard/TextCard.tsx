@@ -1,9 +1,44 @@
+import { useEffect, useState } from 'react';
 import styles from './TextCard.module.css';
+import { editContent } from '../../actions/todayPost.ts';
 
-export default function TextCard({ className, text }: { className: string; text: String }) {
+export default function TextCard({ className, text, id }: { className: string; text: string, id:number }) {
+  const [isEditing, setIsEditing] = useState(false);
+  const [newContent, setNewContent] = useState( text );
+  
+  const handleIsEdit = () => {
+    setIsEditing(true);
+  };
+  const handleEditContent = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNewContent(e.target.value);
+  };
+  const handleSaveContent = () => {
+    setIsEditing(false);
+    setNewContent(newContent);
+    editContent(newContent, id);
+  };
   return (
     <div className={`${className} ${styles.Wrapper}`}>
-      <p className={styles.CardText}>{text}</p>
+      { isEditing ? (
+        <>
+          <input 
+            type='text'
+            value={newContent}
+            onChange={handleEditContent}
+            className={styles.editBox}
+            />
+            <button
+              type='button'
+              onClick={handleSaveContent}
+              className={styles.saveBtn}
+              />
+        </>
+      ) : (
+        <>
+        <p className={styles.CardText}>{newContent || text}</p>
+        <button className={styles.editBtn} onClick={handleIsEdit} /> 
+      </>
+      )}
     </div>
   );
 }

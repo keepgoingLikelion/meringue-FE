@@ -66,6 +66,7 @@ export default function StickerView({ postId }: { postId: number }) {
   };
 
   const emojiColor = getCategoryData(postData?.emotionType ?? 1)?.color ?? '#000000';
+  console.log(postData?.content);
   return (
     <>
       <div ref={cardTextRef} className={styles.clickDiv} role="presentation" onClick={onClickDiv}>
@@ -73,7 +74,7 @@ export default function StickerView({ postId }: { postId: number }) {
           <Menu />
         </div>
         <img className={styles.backButton} src={BackButton} alt="back-button" style={{ backgroundColor: emojiColor }} onClick={onClickBack}/>
-        <PostView type={postData?.emotionType ?? 1} stickers={stickers} content={postData?.content ?? 'Loading...'} />
+        <PostView type={postData?.emotionType ?? 1} stickers={stickers} content={postData?.content ?? 'Loading...'} id={postData?.postId ?? 0}/>
       </div>
       {toggleStickerButton ? (
         <StickerSelection

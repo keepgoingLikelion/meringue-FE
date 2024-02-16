@@ -4,7 +4,6 @@ import { PostData } from '../interface/emojiInterface';
 
 type TodayPostStore = {
   todayPost: PostData | null;
-  postId: number;
   fetchTodayPost: () => Promise<void>;
 };
 
@@ -24,9 +23,10 @@ export async function editContent(newContent: string, postId: number) {
   try {
     const response = await instance.put(`/post/${postId}`, { newContent });
     if (response.status === 200) {
+      // return response.data;
       console.log('Content edited successfully');
     } else {
-      console.error('Failed to edit nickname');
+      console.error('Failed to edit post');
     }
   } catch (error) {
     console.error('Error editing content:', error);
