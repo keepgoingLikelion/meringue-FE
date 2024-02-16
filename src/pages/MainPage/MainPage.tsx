@@ -9,19 +9,56 @@ import filterButton from '../../assets/filter-button.svg';
 import { getCategoryData, getCategoryDataList } from '../../functions/getCategory.ts';
 import QuitButton from '../../assets/quit-button.svg';
 import Menu from '../../components/Menu/Menu.tsx';
+import { editContent } from '../../actions/todayPost.ts';
 
-function MyText({ content }: { content: string }) {
+function MyText({ content, postId }: { content: string, postId:number }) {
   const navigation = useNavigate();
+  const [isEditing, setIsEditing] = useState(false);
+  const [newContent, setNewContent] = useState('');
 
   const onClickCard = () => {
     navigation('/mypost');
   };
 
+  const handleIsEdit = () => {
+    setIsEditing(true);
+  };
+  const handleEditContent = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNewContent(e.target.value);
+  };
+  const handleSaveContent = () => {
+    setIsEditing(false);
+    setNewContent(newContent);
+    editContent(newContent, postId);
+  };
+
   return (
     <div className={styles.wrapper} onClick={onClickCard}>
-      <p className={styles.CardText}>{content}
-      <button onClick={} className={styles.edit}></button>
-      </p>
+      <button
+        onClick={handleIsEdit}
+        type="button"
+        aria-label="editButton"
+        className={styles.edit}
+      />
+      { isEditing ? (
+        <>
+          <input
+            type="text"
+            value={newContent}
+            onChange={handleEditContent}
+            className={styles.editBox}
+          />
+          <button
+            type="button"
+            onClick={handleSaveContent}
+            className={styles.saveBtn}
+          >
+            save
+          </button>
+        </>
+      ) : (
+        <p className={styles.CardText}>{content}</p>
+      )}
     </div>
   );
 }
@@ -99,7 +136,8 @@ function FilterList({ ignoreList, setIgnoreList, setIsFilter }:
   );
 }
 
-export default function MainPage({ content, type }: { content: string; type: number }) {
+export default function MainPage({ content, type, postId }:
+{ content: string; type: number, postId: number }) {
   const [isFilter, setIsFilter] = useState<boolean>(false);
   const [ignoreList, setIgnoreList] = useState<number[]>([]);
   const onClickFilter = () => {
@@ -112,7 +150,7 @@ export default function MainPage({ content, type }: { content: string; type: num
         <Menu />
       </div>
       <div className={styles.title} style={{ backgroundColor: getCategoryData(type)?.color ?? '#000000' }}>
-        <MyText content={content} />
+        <MyText postId={postId} content={content} />
       </div>
       <div className={styles.wave} style={{ backgroundColor: getCategoryData(type)?.color ?? '#000000' }} />
       <div className={styles.bodyWrap}>
