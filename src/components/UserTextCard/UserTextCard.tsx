@@ -27,7 +27,7 @@ export default function UserTextCard({ data }: { data: PostSDTO }) {
           </div>
         </div>
         <div className={styles.commentCount}>
-          {"❤️"} {data.emojiCount}
+          <div style={{ color: 'red', display: 'inline' }}>❤</div> {data.emojiCount}
         </div>
       </div>
       <div className={styles.content}>

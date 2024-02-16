@@ -24,7 +24,7 @@ export default function StickerView() {
   const navigation = useNavigate();
 
   const onClickBack = () => {
-    navigation("/main");
+    navigation(-1);
   }
   const { isLoading: isStickersLoading, data: postData } = useQuery<PostData>(
     {

@@ -16,13 +16,11 @@ function MyText({ content }: { content: string }) {
   const navigation = useNavigate();
   
   const onClickCard = () => {
-    navigation(`/post/${todayPost}`);
+    navigation(`/post/${todayPost?.postId}`);
   }
   return (
     <div className={styles.wrapper} onClick={onClickCard}>
-      <p className={styles.CardText}>{content}
-      <button className={styles.edit}/>
-      </p>
+      <p className={styles.CardText}>{content}</p>
     </div>
   );
 }
@@ -33,8 +31,6 @@ function UserPostList({ ignoreList }: { ignoreList: number[] }) {
       queryFn: () => axios.get<{posts: PostSDTO[]}>('/api/post/postList?category=1,2,3,4,5,6').then((v) => v.data.posts),
     },
   );
-  console.log(data);
-
 
   return (
     <div className={styles.contents}>
@@ -92,11 +88,11 @@ function FilterList({ ignoreList, setIgnoreList, setIsFilter }:
           />
         ))}
       </div>
-      <div style={{ width: '100%' }}>
+      {/* <div style={{ width: '100%' }}>
         <div className={styles.apply}>
           적용
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
