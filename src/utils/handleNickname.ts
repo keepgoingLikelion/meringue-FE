@@ -3,8 +3,8 @@ import { AxiosResponse } from 'axios';
 import instance, { APIResponse } from '../interface/instance';
 
 interface UserInfo {
-  email: 'string',
-  nickname: 'string'
+  email: string,
+  nickname: string,
 }
 export async function fetchUserNickname() {
   try {
@@ -13,7 +13,7 @@ export async function fetchUserNickname() {
     return res.data.data.nickname;
   } catch (error) {
     console.error('Error fetching nickname:', error);
-    return null;
+    return '';
   }
 }
 

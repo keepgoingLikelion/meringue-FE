@@ -24,7 +24,7 @@ function Mypage() {
   useEffect(() => {
     setTodayDate(new Date());
     fetchTodayPost();
-    fetchUserNickname().then((nickname) => setUserName(nickname ?? ""));
+    fetchUserNickname().then((nickname) => setUserName(nickname ?? ''));
   }, [currentDate, fetchTodayPost]);
 
   if (!todayPost) {
