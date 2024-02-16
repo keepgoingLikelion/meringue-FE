@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import styles from './UserTextCard.module.css';
 import { PostSDTO } from '../../interface/postInterface.ts';
 import Happy from '../../assets/moodIcons/happy.svg';
@@ -11,8 +12,12 @@ const getDateToString = (date: Date) => {
 };
 
 export default function UserTextCard({ data }: { data: PostSDTO }) {
+  const navigation = useNavigate();
+  const onClickCard = () => {
+    navigation(`/post/${data.postId}`)
+  }
   return (
-    <div className={styles.wrap}>
+    <div className={styles.wrap} onClick={onClickCard}>
       <div className={styles.profile}>
         <div className={styles.userInfo}>
           <img width="32px" height="32px" src={getCategoryImg(data.emotionType) ?? Happy} alt="happy" />
@@ -22,7 +27,7 @@ export default function UserTextCard({ data }: { data: PostSDTO }) {
           </div>
         </div>
         <div className={styles.commentCount}>
-          23+
+          {"❤️"} {data.emojiCount}
         </div>
       </div>
       <div className={styles.content}>

@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import axios from 'axios';
@@ -13,7 +14,9 @@ import { getCategoryData } from '../../functions/getCategory.ts';
 import BackButton from '../../assets/back-button.svg';
 import { useNavigate } from 'react-router-dom';
 
-export default function StickerView({ postId }: { postId: number }) {
+export default function StickerView() {
+  const { postId } = useParams();
+
   const [stickers, setStickers] = useState<EmojiDetailData[]>([]);
   const [toggleStickerButton, setToggleStickerButton] = useState<boolean>(false);
   const [attachment, setAttachment] = useState<string | null>(null);
@@ -53,11 +56,11 @@ export default function StickerView({ postId }: { postId: number }) {
       y: percentGenerator(top, innerHeight),
       x: percentGenerator(left, innerWidth),
       emojiUrl: attachment,
-      postId,
+      postId: parseInt(postId!, 10),
     };
 
     setAttachment(null);
-    axios.post<EmojiDetailData>('/api/emojiSave', currentSticker).then((v) => {
+    axios.post<EmojiDetailData>('/api/saveEmoji', currentSticker).then((v) => {
       setStickers((state) => [
         ...state,
         v.data,

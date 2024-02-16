@@ -2,9 +2,9 @@
 import Cookies from 'js-cookie';
 
 export function saveAccessToken(accessToken: string): void {
-  Cookies.set('accessToken', accessToken);
+  Cookies.set('access_token', accessToken);
 }
 
 export function useAccessToken(): string | undefined {
-  return Cookies.get('accessToken');
+  return Cookies.get('access_token');
 }

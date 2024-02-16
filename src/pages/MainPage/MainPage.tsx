@@ -9,16 +9,20 @@ import { getCategoryData, getCategoryDataList } from '../../functions/getCategor
 import QuitButton from '../../assets/quit-button.svg';
 import Menu from '../../components/Menu/Menu.tsx';
 import { useNavigate } from 'react-router-dom';
+import { useTodayPostStore } from '../../actions/todayPost.ts';
 
 function MyText({ content }: { content: string }) {
+  const { todayPost } = useTodayPostStore();
   const navigation = useNavigate();
   
   const onClickCard = () => {
-    navigation("/mypost");
+    navigation(`/post/${todayPost}`);
   }
   return (
     <div className={styles.wrapper} onClick={onClickCard}>
-      <p className={styles.CardText}>{content}</p>
+      <p className={styles.CardText}>{content}
+      <button className={styles.edit}/>
+      </p>
     </div>
   );
 }
