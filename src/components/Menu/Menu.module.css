@@ -1,0 +1,35 @@
+/* 상단메뉴바  */
+.wrapper{
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 70%;
+    background-color:rgb(255, 255, 255, 0.15);
+    @media (min-width: 1000px) {
+        gap: 1100px;
+    }
+}
+
+.logo{
+    width: 40px;
+    height: 40px;
+    padding-bottom: 5px;
+}
+
+.button{
+    /* border: 2px solid #713c00b6;  */
+    border-radius: 100%;
+    width: 40px;
+    height: 40px;
+    margin-left: 10px;
+    margin-bottom: 5px;
+    padding: 3px;
+}
+
+.buttons{
+    display: flex;
+    flex-direction: row;
+    color: #713c00;
+}
