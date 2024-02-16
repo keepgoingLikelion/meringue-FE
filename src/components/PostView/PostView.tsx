@@ -5,8 +5,8 @@ import styles from './PostView.module.css';
 import { STICKER_SIZE } from '../../const/CONST.ts';
 import { getCategoryData } from '../../functions/getCategory.ts';
 
-export default function PostView({ stickers, content, type, id }
-: { stickers: EmojiDetailData[]; content: string; type: number, id:number }) {
+export default function PostView({ stickers, content, type }
+: { stickers: EmojiDetailData[]; content: string; type: number }) {
   return (
     <div className={styles.wrap} style={{ backgroundColor: getCategoryData(type)?.color ?? '#000000' }}>
       {stickers.map((v) => {
@@ -22,7 +22,6 @@ export default function PostView({ stickers, content, type, id }
       <TextCard
         className={styles.CardTextWrapper}
         text={content}
-        id={id}
       />
     </div>
   );

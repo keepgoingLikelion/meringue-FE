@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import styles from './TextCard.module.css';
 import { editContent } from '../../actions/todayPost.ts';
 
-export default function TextCard({ className, text, id }: { className: string; text: string, id:number }) {
+export default function TextCard({ className, text }: { className: string; text: string}) {
   const [isEditing, setIsEditing] = useState(false);
   const [newContent, setNewContent] = useState( text );
   
@@ -15,7 +15,7 @@ export default function TextCard({ className, text, id }: { className: string; t
   const handleSaveContent = () => {
     setIsEditing(false);
     setNewContent(newContent);
-    editContent(newContent, id);
+    // editContent(newContent);
   };
   return (
     <div className={`${className} ${styles.Wrapper}`}>

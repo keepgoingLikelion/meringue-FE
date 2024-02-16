@@ -51,7 +51,7 @@ function App() {
         <Route path="/post/:postId" element={todayPost && <StickerView  />} />
         <Route path="/mypage" element={<UserPage />} />
         <Route path="/mylog/:emotionType" element={<UserLog />} />
-        <Route path="/mypost" element={<PostDetail />} />
+        <Route path="/post/:postId" element={<PostDetail />} />
         <Route path="/myLikedPost/:postId" element={<LikedPostDetail />} />
         <Route path="/post/today" element={<TodayPostDetail />} />
       </Routes>
