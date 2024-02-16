@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useQuery } from 'react-query';
+import { useNavigate } from 'react-router-dom';
 import styles from './MainPage.module.css';
 import UserTextCard from '../../components/UserTextCard/UserTextCard.tsx';
 import { PostSDTO } from '../../interface/postInterface.ts';
@@ -8,14 +9,14 @@ import filterButton from '../../assets/filter-button.svg';
 import { getCategoryData, getCategoryDataList } from '../../functions/getCategory.ts';
 import QuitButton from '../../assets/quit-button.svg';
 import Menu from '../../components/Menu/Menu.tsx';
-import { useNavigate } from 'react-router-dom';
 
 function MyText({ content }: { content: string }) {
   const navigation = useNavigate();
-  
+
   const onClickCard = () => {
-    navigation("/mypost");
-  }
+    navigation('/mypost');
+  };
+
   return (
     <div className={styles.wrapper} onClick={onClickCard}>
       <p className={styles.CardText}>{content}</p>
@@ -26,11 +27,10 @@ function UserPostList({ ignoreList }: { ignoreList: number[] }) {
   const { isLoading, data } = useQuery<PostSDTO[]>(
     {
       queryKey: ['backgroundStickers'],
-      queryFn: () => axios.get<{posts: PostSDTO[]}>('/api/post/postList?category=1,2,3,4,5,6').then((v) => v.data.posts),
+      queryFn: () => axios.get<{ posts: PostSDTO[] }>('/api/post/postList?category=1,2,3,4,5,6').then((v) => v.data.posts),
     },
   );
   console.log(data);
-
 
   return (
     <div className={styles.contents}>

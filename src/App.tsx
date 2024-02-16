@@ -3,6 +3,8 @@ import {
   BrowserRouter as Router, Route, Routes,
 } from 'react-router-dom';
 import axios from 'axios';
+import { LuLoader } from 'react-icons/lu';
+import { useEffect, useState } from 'react';
 import MainPage from './pages/MainPage/MainPage';
 import UserPage from './pages/UserPage/UserPage';
 import UserLog from './pages/UserLog/UserLog';
@@ -12,23 +14,21 @@ import TodayPostDetail from './components/PostDetail/TodayPostDetail';
 import LoginView from './pages/LoginView/LoginView';
 import { useAccessToken } from './utils/getToken';
 import { useTodayPostStore } from './actions/todayPost';
-import { LuLoader } from 'react-icons/lu';
 import './styles/Common.css';
-import { useEffect, useState } from 'react';
 import TodayPostView from './pages/TodayPostView/TodayPostView';
 import StartView from './pages/StartView/StartView';
 import StickerView from './pages/StickerView/StickerView';
 
 axios.defaults.baseURL = 'http://localhost:8080/';
 axios.defaults.withCredentials = true;
-axios.defaults.headers.common.Authorization = `Bearer ${useAccessToken()}`;
+axios.defaults.headers.common.Authorization = `Bearer ${useAccessToken}`;
 
 function App() {
   const [type, setType] = useState<number>(1);
   const { todayPost, fetchTodayPost } = useTodayPostStore();
   useEffect(() => {
-    if (!useAccessToken())  {
-      window.location.href = axios.defaults.baseURL + "login";
+    if (!useAccessToken) {
+      window.location.href = `${axios.defaults.baseURL}login`;
       return;
     }
     fetchTodayPost().then(() => {});
@@ -39,16 +39,16 @@ function App() {
       {!todayPost && (
         <div>
           <LuLoader
-            style={{ color: "lightgrey", width: "30px", height: "30px" }}
+            style={{ color: 'lightgrey', width: '30px', height: '30px' }}
           />
         </div>
       )}
       <Routes>
-        <Route path="/" element={ <LoginView /> } />
-        <Route path="/main" element={todayPost && <div><MainPage content={todayPost.content} type={todayPost.emotionType}/></div>} />
+        <Route path="/" element={<LoginView />} />
+        <Route path="/main" element={todayPost && <div><MainPage content={todayPost.content} type={todayPost.emotionType} /></div>} />
         <Route path="/newpost" element={<TodayPostView setType={setType} />} />
-        <Route path="/start" element={<StartView type={type}/>} />
-        <Route path="/mypost" element={todayPost && <StickerView  postId={todayPost.postId}/>} />
+        <Route path="/start" element={<StartView type={type} />} />
+        <Route path="/mypost" element={todayPost && <StickerView postId={todayPost.postId} />} />
         <Route path="/mypage" element={<UserPage />} />
         <Route path="/mylog/:emotionType" element={<UserLog />} />
         <Route path="/post/:postId" element={<PostDetail />} />
@@ -59,5 +59,4 @@ function App() {
   );
 }
 
-export default App;
-
+export default App; 
