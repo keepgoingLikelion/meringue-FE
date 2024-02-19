@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useQuery } from 'react-query';
 import styles from './MainPage.module.css';
@@ -10,6 +10,7 @@ import QuitButton from '../../assets/quit-button.svg';
 import Menu from '../../components/Menu/Menu.tsx';
 import { useNavigate } from 'react-router-dom';
 import { useTodayPostStore } from '../../actions/todayPost.ts';
+import { PostData } from '../../interface/emojiInterface.ts';
 
 function MyText({ content }: { content: string }) {
   const { todayPost } = useTodayPostStore();
@@ -97,22 +98,26 @@ function FilterList({ ignoreList, setIgnoreList, setIsFilter }:
   );
 }
 
-export default function MainPage({ content, type }: { content: string; type: number }) {
+export default function MainPage() {
   const [isFilter, setIsFilter] = useState<boolean>(false);
   const [ignoreList, setIgnoreList] = useState<number[]>([]);
+  const [todayPost, setTodayPost] = useState<PostData>();
   const onClickFilter = () => {
     setIsFilter(true);
   };
+  useEffect(() => {
+    axios.get("/api/post/myPost").then(res => setTodayPost(res.data));
+  }, []);
 
   return (
     <div className={styles.wrap}>
-      <div style={{ width: '100%', backgroundColor: getCategoryData(type)?.color ?? '#000000' }}>
+      <div style={{ width: '100%', backgroundColor: getCategoryData(todayPost?.emotionType ?? 0)?.color ?? '#000000' }}>
         <Menu />
       </div>
-      <div className={styles.title} style={{ backgroundColor: getCategoryData(type)?.color ?? '#000000' }}>
-        <MyText content={content} />
+      <div className={styles.title} style={{ backgroundColor: getCategoryData(todayPost?.emotionType ?? 0)?.color ?? '#000000' }}>
+        <MyText content={todayPost?.content ?? ""} />
       </div>
-      <div className={styles.wave} style={{ backgroundColor: getCategoryData(type)?.color ?? '#000000' }} />
+      <div className={styles.wave} style={{ backgroundColor: getCategoryData(todayPost?.emotionType ?? 0)?.color ?? '#000000' }} />
       <div className={styles.bodyWrap}>
         <div className={styles.body}>
           <div className={styles.filter} onClick={onClickFilter} role="presentation">

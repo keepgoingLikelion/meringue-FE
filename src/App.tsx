@@ -45,7 +45,7 @@ function App() {
       )}
       <Routes>
         <Route path="/" element={ <LoginView /> } />
-        <Route path="/main" element={todayPost && <div><MainPage content={todayPost.content} type={todayPost.emotionType}/></div>} />
+        <Route path="/main" element={todayPost && <div><MainPage/></div>} />
         <Route path="/newpost" element={<TodayPostView setType={setType} />} />
         <Route path="/start" element={<StartView type={type}/>} />
         <Route path="/post/:postId" element={todayPost && <StickerView  />} />
