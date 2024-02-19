@@ -45,7 +45,7 @@ export default function LoginView ({type}:EmotionIconProps): JSX.Element {
           <div className={style.logoContainer}>
 
             <div className={style.logo}>
-                <img src={`/src/assets/moodIcons/${userIcon(type)}.svg`} alt={`${userIcon(type)}`}/>
+                <img className={style.today_logo} src={`/src/assets/moodIcons/${userIcon(type)}.svg`} alt={`${userIcon(type)}`}/>
             </div>
     
             <div className={style.mess7}>오늘 내가 구운 쿠키는...</div>
