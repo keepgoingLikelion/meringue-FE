@@ -5,9 +5,9 @@
     height: 175px;
     width: 100%;
     justify-content: center;
-    gap: 50%;
+    gap: 150px;
     @media (min-width: 1000px) {
-        gap: 70%;
+        gap: 60%;
     }
 }
 .profileContent{
@@ -39,6 +39,7 @@
     font-family: 'Pretendard';
     color: var(--point-brown-color);
     font-size: 20px;
+    width: 100px;
 }
 .inputBox:focus{
     outline: none;
@@ -86,6 +87,9 @@ h4.todayDate{
     max-height: calc(16px * 4); 
     overflow: hidden; 
     margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .cardContent h5{
     font-family: 'Pretendard';
@@ -95,7 +99,7 @@ h4.todayDate{
 }
 .moveButton{
     width: 55px;
-    margin-top: 15px;
+    margin-top: 25px;
     border-radius: 20px;
     background-color: var(--theme-yellow-color);
     border: 1px #713c00bd solid;

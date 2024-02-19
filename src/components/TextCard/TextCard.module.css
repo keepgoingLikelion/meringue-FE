@@ -24,30 +24,37 @@
 }
 .editBtn{
     margin-top: 10px;
-    display: none;
     background-image: url('/src/assets/edit.svg');
     background-repeat: no-repeat;
     width: 15px;
     height: 15px;
     background-color: #ffff;
     border-style: none;
+    @media (min-width: 431px) {
+        display: none;
+    }
 }
 .saveBtn{
     margin-top: 10px;
-    display: none;
     background-image: url('/src/assets/edit-save.svg');
     background-repeat: no-repeat;
     width: 15px;
     height: 15px;
     background-color: #ffff;
     border-style: none;
+    @media (min-width: 431px) {
+        display: none;
+    }
 }
-.Wrapper:hover .editBtn{ 
-    display: block;
+@media (min-width: 431px) {
+    .Wrapper:hover .editBtn{ 
+        display: block;
+    }
+    .Wrapper:hover .saveBtn{ 
+        display: block;
+    }
 }
-.Wrapper:hover .saveBtn{ 
-    display: block;
-}
+
 .editBox {
     width: 321px;
     background-color: #FFFDF8;
