@@ -18,13 +18,8 @@
     border-radius: 26px / 26px;
     padding: 36px 36px;
 }
-button{
-    display: none;
-}
-.Wrapper:hover button{ 
-    display: block;
-}
 .editBtn{
+    display: none;
     background-image: url('/src/assets/edit.svg');
     background-repeat: no-repeat;
     width: 15px;
@@ -33,10 +28,17 @@ button{
     border-style: none;
 }
 .saveBtn{
+    display: none;
     background-image: url('/src/assets/edit-save.svg');
     background-repeat: no-repeat;
     width: 15px;
     height: 15px;
     background-color: #ffff;
     border-style: none;
+}
+.Wrapper:hover .editBtn{ 
+    display: block;
+}
+.Wrapper:hover .saveBtn{ 
+    display: block;
 }
