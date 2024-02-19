@@ -10,7 +10,7 @@ export default function TextCard({ className, text, postId }:
   const handleIsEdit = () => {
     setIsEditing(true);
   };
-  const handleEditContent = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleEditContent = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setNewContent(e.target.value);
   };
   const handleSaveContent = () => {
@@ -19,21 +19,20 @@ export default function TextCard({ className, text, postId }:
     editContent(newContent, postId);
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      handleSaveContent();
-    }
-  };
+  // const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+  //   if (e.key === 'Enter') {
+  //     handleSaveContent();
+  //   }
+  // };
 
   return (
     <div className={`${className} ${styles.Wrapper}`}>
       { isEditing ? (
         <>
-          <input
-            type="text"
+          <textarea
             value={newContent}
             onChange={handleEditContent}
-            onKeyDown={handleKeyDown}
+            // onKeyDown={handleKeyDown}
             className={styles.editBox}
           />
           <button

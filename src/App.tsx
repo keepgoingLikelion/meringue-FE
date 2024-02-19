@@ -39,7 +39,7 @@ function App() {
       {!todayPost && (
         <div>
           <LuLoader
-            style={{ color: "lightgrey", width: "30px", height: "30px" }}
+            style={{ color: "#FFFBF2", width: "30px", height: "30px" }}
           />
         </div>
       )}
