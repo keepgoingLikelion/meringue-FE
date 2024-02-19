@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './TextCard.module.css';
 import { editContent } from '../../actions/todayPost.ts';
 
@@ -19,6 +19,12 @@ export default function TextCard({ className, text, postId }:
     editContent(newContent, postId);
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleSaveContent();
+    }
+  };
+
   return (
     <div className={`${className} ${styles.Wrapper}`}>
       { isEditing ? (
@@ -27,6 +33,7 @@ export default function TextCard({ className, text, postId }:
             type="text"
             value={newContent}
             onChange={handleEditContent}
+            onKeyDown={handleKeyDown}
             className={styles.editBox}
           />
           <button
