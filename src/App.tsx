@@ -1,5 +1,6 @@
 import './App.css';
 import {
+  BrowserRouter,
   BrowserRouter as Router, Route, Routes,
 } from 'react-router-dom';
 import axios from 'axios';
@@ -35,27 +36,29 @@ function App() {
   }, []);
 
   return (
-    <Router>
-      {!todayPost && (
-        <div>
-          <LuLoader
-            style={{ color: '#FFFBF2', width: '30px', height: '30px' }}
-          />
-        </div>
-      )}
-      <Routes>
-        <Route path="/" element={<LoginView />} />
-        <Route path="/main" element={todayPost && <div><MainPage /></div>} />
-        <Route path="/newpost" element={<TodayPostView setType={setType} />} />
-        <Route path="/start" element={<StartView type={type} />} />
-        <Route path="/post/:postId" element={todayPost && <StickerView />} />
-        <Route path="/mypage" element={<UserPage />} />
-        <Route path="/mylog/:emotionType" element={<UserLog />} />
-        <Route path="/post/:postId" element={<PostDetail />} />
-        <Route path="/myLikedPost/:postId" element={<LikedPostDetail />} />
-        <Route path="/post/today" element={<TodayPostDetail />} />
-      </Routes>
-    </Router>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
+      <Router>
+        {!todayPost && (
+          <div>
+            <LuLoader
+              style={{ color: '#FFFBF2', width: '30px', height: '30px' }}
+            />
+          </div>
+        )}
+        <Routes>
+          <Route path="/" element={<LoginView />} />
+          <Route path="/main" element={todayPost && <div><MainPage /></div>} />
+          <Route path="/newpost" element={<TodayPostView setType={setType} />} />
+          <Route path="/start" element={<StartView type={type} />} />
+          <Route path="/post/:postId" element={todayPost && <StickerView />} />
+          <Route path="/mypage" element={<UserPage />} />
+          <Route path="/mylog/:emotionType" element={<UserLog />} />
+          <Route path="/post/:postId" element={<PostDetail />} />
+          <Route path="/myLikedPost/:postId" element={<LikedPostDetail />} />
+          <Route path="/post/today" element={<TodayPostDetail />} />
+        </Routes>
+      </Router>
+    </BrowserRouter>
   );
 }
 
