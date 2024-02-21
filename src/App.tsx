@@ -39,13 +39,13 @@ function App() {
       {!todayPost && (
         <div>
           <LuLoader
-            style={{ color: "lightgrey", width: "30px", height: "30px" }}
+            style={{ color: "#FFFBF2", width: "30px", height: "30px" }}
           />
         </div>
       )}
       <Routes>
         <Route path="/" element={ <LoginView /> } />
-        <Route path="/main" element={todayPost && <div><MainPage content={todayPost.content} type={todayPost.emotionType}/></div>} />
+        <Route path="/main" element={todayPost && <div><MainPage/></div>} />
         <Route path="/newpost" element={<TodayPostView setType={setType} />} />
         <Route path="/start" element={<StartView type={type}/>} />
         <Route path="/post/:postId" element={todayPost && <StickerView  />} />

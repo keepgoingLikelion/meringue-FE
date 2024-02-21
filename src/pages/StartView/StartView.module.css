@@ -35,12 +35,15 @@
   .logo{
   
       background: no-repeat;
-      width: 70px;
-      height: 70px;
+      
   
     
   }
-  
+  .today_logo{
+    width: 70px;
+      height: 70px;
+  }
+
    .mess7{
     padding-top: 20px;
   

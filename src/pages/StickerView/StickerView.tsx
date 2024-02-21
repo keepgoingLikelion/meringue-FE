@@ -76,7 +76,7 @@ export default function StickerView() {
           <Menu />
         </div>
         <img className={styles.backButton} src={BackButton} alt="back-button" style={{ backgroundColor: emojiColor }} onClick={onClickBack}/>
-        <PostView type={postData?.emotionType ?? 1} stickers={stickers} content={postData?.content ?? 'Loading...'} />
+        <PostView type={postData?.emotionType ?? 1} stickers={stickers} content={postData?.content ?? 'Loading...'} postId = {postData?.postId ?? 0} />
       </div>
       {toggleStickerButton ? (
         <StickerSelection
