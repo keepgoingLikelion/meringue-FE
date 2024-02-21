@@ -1,5 +1,4 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
 import ReactDOM from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
@@ -11,9 +10,7 @@ const queryClient = new QueryClient();
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter basename="https://keepgoinglikelion.github.io/meringue-FE/">
-        <App />
-      </BrowserRouter>
+      <App />
     </QueryClientProvider>
   </React.StrictMode>,
 );
