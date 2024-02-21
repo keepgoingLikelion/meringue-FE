@@ -11,7 +11,7 @@ function LikedPostDetail() {
     const fetchPost = async () => {
       try {
         const api = `post/${postId}`;
-        const res: {data: PostData} = await instance.get(api);
+        const res: { data: PostData } = await instance.get(api);
         setPost(res.data);
       } catch (error) {
         console.error('Error fetching LikedPostDetail:', error);
@@ -26,7 +26,7 @@ function LikedPostDetail() {
   }
 
   return (
-    <PostView stickers={post.emojis} content={post.content} type={post.emotionType} />
+    <PostView postId={parseInt(postId!, 10)} stickers={post.emojis} content={post.content} type={post.emotionType} />
   );
 }
 

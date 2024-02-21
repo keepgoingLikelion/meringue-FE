@@ -1,23 +1,24 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import style from './StartView.module.css'
+import style from './StartView.module.css';
+import { getCategoryImg } from '../../functions/getCategory.ts';
 
 interface EmotionIconProps {
   type: number;
 }
 
-export default function LoginView ({type}:EmotionIconProps): JSX.Element {
+export default function LoginView({ type }:EmotionIconProps): JSX.Element {
   const navigation = useNavigate();
 
   useEffect(() => {
-      setTimeout(function () {
-          navigation("/main");
-      }, 3000);
+    setTimeout(() => {
+      navigation('/main');
+    }, 3000);
   }, []);
 
-  const userIcon = (emotionType:number): string =>{
-    switch (emotionType){
+  const userIcon = (emotionType:number): string => {
+    switch (emotionType) {
       case 1: return 'happy';
       case 2: return 'sad';
       case 3: return 'angry';
@@ -28,8 +29,8 @@ export default function LoginView ({type}:EmotionIconProps): JSX.Element {
     }
   };
 
-  const userType = (emotionType:number): string =>{
-    switch (emotionType){
+  const userType = (emotionType:number): string => {
+    switch (emotionType) {
       case 1: return '오예';
       case 2: return '뿌앵';
       case 3: return '부글부글';
@@ -40,20 +41,22 @@ export default function LoginView ({type}:EmotionIconProps): JSX.Element {
     }
   };
 
-    return(
-        <div className={style.wrapp}>
-          <div className={style.logoContainer}>
+  return (
+    <div className={style.wrapp}>
+      <div className={style.logoContainer}>
 
-            <div className={style.logo}>
-                <img className={style.today_logo} src={`/src/assets/moodIcons/${userIcon(type)}.svg`} alt={`${userIcon(type)}`}/>
-            </div>
-    
-            <div className={style.mess7}>오늘 내가 구운 쿠키는...</div>
-    
-            <div className={style.mess8}>{userType(type)}머랭</div>
-    
-          </div>
+        <div className={style.logo}>
+          <img className={style.today_logo} src={getCategoryImg(type)!} alt={`${userIcon(type)}`} />
         </div>
-    )
-}
 
+        <div className={style.mess7}>오늘 내가 구운 쿠키는...</div>
+
+        <div className={style.mess8}>
+          {userType(type)}
+          머랭
+        </div>
+
+      </div>
+    </div>
+  );
+}

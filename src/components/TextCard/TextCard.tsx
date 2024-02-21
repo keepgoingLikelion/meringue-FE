@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styles from './TextCard.module.css';
 import { editContent } from '../../actions/todayPost.ts';
 

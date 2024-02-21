@@ -12,6 +12,7 @@ import s from './UserPage.module.css';
 import theme from '../../styles/ThemeColor.module.css';
 import getThemeColor from '../../utils/GetThemeColor.tsx';
 import { fetchUserNickname, updateNickname } from '../../utils/handleNickname';
+import { getCategoryImg } from '../../functions/getCategory.ts';
 
 function Mypage() {
   const { currentDate } = useCalendarStore();
@@ -24,7 +25,7 @@ function Mypage() {
   useEffect(() => {
     setTodayDate(new Date());
     fetchTodayPost();
-    fetchUserNickname().then((nickname) => setUserName(nickname ?? ""));
+    fetchUserNickname().then((nickname) => setUserName(nickname ?? ''));
   }, [currentDate, fetchTodayPost]);
 
   if (!todayPost) {
@@ -122,7 +123,7 @@ function Mypage() {
           </div>
           <div className={s.userIcon}>
             <img
-              src={`/src/assets/moodIcons/${getEmotionIcon(todayPost.emotionType)}.svg`}
+              src={getCategoryImg(todayPost.emotionType)!}
               alt={`${getEmotionIcon(todayPost.emotionType)}`}
               style={{ width: '75px', height: '75px', marginBottom: '13px' }}
             />

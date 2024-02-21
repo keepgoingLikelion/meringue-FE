@@ -15,6 +15,7 @@ function TodayPostDetail() {
 
   return (
     <PostView
+      postId={todayPost.postId}
       stickers={todayPost.emojis}
       content={todayPost.content}
       type={todayPost.emotionType}
