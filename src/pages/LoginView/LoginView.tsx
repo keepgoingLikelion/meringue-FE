@@ -1,22 +1,22 @@
 import axios from 'axios';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import style from './LoginView.module.css';
 import basicLogoLined from '../../assets/basic-logo-lined.svg';
 import questionMark from '../../assets/question-mark.svg';
 import loginButton from '../../assets/login-button.svg';
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useTodayPostStore } from '../../actions/todayPost';
 
-const googleURL = 'http://localhost:8080/login';
+const googleURL = 'http://ec2-15-164-212-162.ap-northeast-2.compute.amazonaws.com:8080/login';
 
 export default function LoginView() {
   const navigation = useNavigate();
   const { todayPost } = useTodayPostStore();
   useEffect(() => {
-    if (axios.defaults.headers.common.Authorization && todayPost)  {
-      navigation('/main')
+    if (axios.defaults.headers.common.Authorization && todayPost) {
+      navigation('/main');
     }
-      // window.location.href = "http://localhost:8080/login";
+    // window.location.href = "http://localhost:8080/login";
   }, [todayPost]);
   return (
     <div className={style.wrapp}>

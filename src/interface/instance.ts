@@ -18,7 +18,7 @@ interface CustomInstance extends AxiosInstance {
 
 // Axios 인스턴스 생성
 const instance: CustomInstance = axios.create({
-  baseURL: 'http://localhost:8080/api/',
+  baseURL: 'http://ec2-15-164-212-162.ap-northeast-2.compute.amazonaws.com:8080/api/',
   withCredentials: true,
   headers: {},
 });
