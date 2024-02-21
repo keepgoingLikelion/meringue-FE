@@ -1,4 +1,10 @@
 import s from '../components/EmotionList/EmotionList.module.css';
+import Happy from '../assets/moodIcons/happy.svg';
+import Sad from '../assets/moodIcons/sad.svg';
+import Angry from '../assets/moodIcons/angry.svg';
+import Upset from '../assets/moodIcons/upset.svg';
+import Simsim from '../assets/moodIcons/simsim.svg';
+import Tired from '../assets/moodIcons/tired.svg';
 
 interface EmotionIconProps {
   type: number;
@@ -8,24 +14,24 @@ function GetEmotionIcon({ type }: EmotionIconProps): JSX.Element {
   const getEmotionIcon = (emotion: number): string => {
     switch (emotion) {
       case 1:
-        return 'happy';
+        return Happy;
       case 2:
-        return 'sad';
+        return Sad;
       case 3:
-        return 'angry';
+        return Angry;
       case 4:
-        return 'upset';
+        return Upset;
       case 5:
-        return 'simsim';
+        return Simsim;
       case 6:
-        return 'tired';
+        return Tired;
       default:
         return '';
     }
   };
   return (
     <img
-      src={`/src/assets/moodIcons/${getEmotionIcon(type)}.svg`}
+      src={getEmotionIcon(type)}
       alt={`${getEmotionIcon(type)}`}
       className={s.button}
     />

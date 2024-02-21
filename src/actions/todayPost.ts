@@ -21,9 +21,9 @@ export const useTodayPostStore = create<TodayPostStore>((set) => ({
 
 export async function editContent(content: string, postId: number) {
   try {
-    const response = await instance.put(`/post/${postId}`, { content });
+    await instance.put(`/post/${postId}`, { content });
     console.log('Content edited successfully');
-    } catch (error) {
+  } catch (error) {
     console.error('Error editing content:', error);
   }
 }
