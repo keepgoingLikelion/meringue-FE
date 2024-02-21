@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { LuLoader } from 'react-icons/lu';
 import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import MenuBar from '../../components/Menu/Menu';
 import styles from '../../styles/Layout.module.css';
 import Calendar from '../../components/Calendar/Container';
@@ -23,9 +24,11 @@ function Mypage() {
   const [userName, setUserName] = useState('');
 
   useEffect(() => {
-    setTodayDate(new Date());
-    fetchTodayPost();
-    fetchUserNickname().then((nickname) => setUserName(nickname ?? ''));
+    if (axios.defaults.headers.common.Authorization) {
+      setTodayDate(new Date());
+      fetchTodayPost();
+      fetchUserNickname().then((nickname) => setUserName(nickname ?? ''));
+    }
   }, [currentDate, fetchTodayPost]);
 
   if (!todayPost) {
